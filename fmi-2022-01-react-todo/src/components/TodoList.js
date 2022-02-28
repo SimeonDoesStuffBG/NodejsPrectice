@@ -4,7 +4,7 @@ const TodoList = ({todos, filter, ...rest})=>(
     <div className="TodoList">
         <ol>
             {todos.filter(todo=>filter===ALL_STAT||todo.status===filter)
-                .map(todo=>(<li>{todo.text} - {ToDoStats[todo.stat]}</li>))
+                .map(todo=>(<li key = {todo.id}>{todo.text} - {ToDoStats[todo.stat]}</li>))
             }
         </ol>
     </div>
