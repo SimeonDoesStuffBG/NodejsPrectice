@@ -1,0 +1,22 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "thing",
+  "main": "index.js",
+  "scripts": {
+    "test": "do"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimeonDoesStuffBG/NodejsPrectice.git"
+  },
+  "keywords": [
+    "Meep"
+  ],
+  "author": "LeoTheBackgroundSheep",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SimeonDoesStuffBG/NodejsPrectice/issues"
+  },
+  "homepage": "https://github.com/SimeonDoesStuffBG/NodejsPrectice#readme"
+}
