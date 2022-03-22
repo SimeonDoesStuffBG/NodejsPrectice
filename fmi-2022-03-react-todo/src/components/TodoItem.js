@@ -16,7 +16,11 @@ const TodoItem = ({ todo }) => {
                 <span className='TodoItem-status'>
                     {TodoStatus[todo.status]}
                 </span>
-            </span>
+
+                <span>
+                    <button type = "button" onClick = {() => {}}>DELETE</button>
+                </span>
+                </span>
         </div>
   )
 }
