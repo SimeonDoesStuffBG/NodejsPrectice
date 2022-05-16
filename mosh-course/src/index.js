@@ -11,7 +11,7 @@ import CounterList from './components/counterList';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CounterList />
+    <App />
   </React.StrictMode>
 );
 
