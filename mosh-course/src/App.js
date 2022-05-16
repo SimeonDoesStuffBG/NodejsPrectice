@@ -14,6 +14,16 @@ class App extends Component{
     ]
 }
 
+constructor(){
+  super();
+  console.log('fsdf');
+}
+
+componentDidMount(){
+  //ajaxCall
+  console.log('mounted')
+}
+
 handleDelete = (counterID) => {
     const counters = this.state.counters.filter(c=>c.id !== counterID);
     this.setState({counters});
