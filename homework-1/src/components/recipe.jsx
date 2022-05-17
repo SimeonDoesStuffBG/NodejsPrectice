@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-
-class Recipe extends Component {
-    state = {  } 
-    render() { 
-        return (<div>
-            <h4>{this.state.name}</h4>
-            <h6>{this.state.sharedBy}</h6>
-            <p>{this.state.description}</p>
-            
-        </div>);
+export class Recipe{
+    constructor(id='',creatorID='',name='',briefDesc='',timeToCook=0,products=[],longDesc='',picture='',tags=[],){
+        this.id = id;
+        this.creatorID=creatorID;
+        this.name=name;
+        this.briefDesc=briefDesc;
+        this.timeToCook=timeToCook;
+        this.products= [...products];
+        this.longDesc=longDesc;
+        this.picture=picture;
+        this.tags=[...tags];  
+        this.createdAt=new Date().toString();
+        this.lastUpdate=this.createdAt;      
     }
 }
  
-export default Recipe;

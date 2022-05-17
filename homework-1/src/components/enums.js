@@ -1,12 +1,21 @@
-//User roles
-const USER=0, ADMIN=1;
+//gender
+export const M=0;
+export const F=0;
+export const NB=0;
+export const S=0;
+export const NA=0;
 
-const ROLES = ['user', 'admin'];
+export const Gender = ['Male','Female','Non-Binary',"Satan's Spawn", "I preffer Not to say"];
 
-const NA=0, MALE=1, FEMALE=2, NB=3, EVIL=4;
+//user roles
+export const USER=0;
+export const Admin=1;
 
-const GENDER = ['I prefer not to say', 'Male', 'Female', 'Non-Binary', "Satan's Spawn"];
+export const Role = ['User','Admin'];
 
-const ACTIVE=0, SUSPENDED=1, DEACTIVATED=2;
+//status
+export const ACTIVE = 0;
+export const SUSSPENDED=1;
+export const DISCONNECTED=2;
 
-const status = ['Active', 'Suspended', 'Deactivated'];
+export const statis=['Active','Suspended','Disconected'];
