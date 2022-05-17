@@ -1,6 +1,0 @@
-.TodoList-items {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    list-style-type: none;
-}

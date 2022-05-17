@@ -1,0 +1,225 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Default",
+      "lastName": "Admin",
+      "username": "admin",
+      "passwod": "admin",
+      "role": "ADMIN"
+    },
+    {
+      "id": 2,
+      "firstName": "Default",
+      "lastName": "Author",
+      "username": "author",
+      "passwod": "author",
+      "role": "AUTHOR"
+    },
+    {
+      "id": 3,
+      "firstName": "Default",
+      "lastName": "Reader",
+      "username": "reader",
+      "passwod": "reader",
+      "role": "READER"
+    }
+  ],
+  "posts": [
+    {
+      "id": 2,
+      "title": "Fetch API",
+      "content": "Fetch API is easy to use Promise-based web service client API.",
+      "authorId": 1,
+      "tags": [
+        "fetch",
+        "api",
+        "http",
+        "client"
+      ],
+      "imageUrl": "https://www.publicdomainpictures.net/pictures/220000/velka/binare-kontakte.jpg",
+      "active": true
+    },
+    {
+      "id": 3,
+      "title": "Fetch API 123",
+      "content": "Fetch API is easy to use Promise-based web service client API.",
+      "tags": [
+        "fetch",
+        "api",
+        "new tag"
+      ],
+      "imageUrl": "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/89033476/original/34981a0ec6461c35c1b9b44a960e2d4747245dd9/develop-node-js-server.png",
+      "authorId": 1,
+      "active": true
+    },
+    {
+      "title": "Fetch API",
+      "content": "Fetch API is easy to use Promise-based web service client API.",
+      "authorId": 1,
+      "tags": [
+        "fetch",
+        "api",
+        "http",
+        "client"
+      ],
+      "imageUrl": "https://www.publicdomainpictures.net/pictures/160000/velka/ancient-world-map-from-1689.jpg",
+      "active": true,
+      "id": 4
+    },
+    {
+      "id": 8,
+      "title": "aaa",
+      "content": "aaaa\naaa\naaa\n\naaaaaa",
+      "tags": [
+        "aaaa",
+        "bbbb",
+        "cccc"
+      ],
+      "imageUrl": "https://assets.logitech.com/assets/64683/performance-mouse-mx.png",
+      "authorId": 2,
+      "active": true
+    },
+    {
+      "id": 9,
+      "title": "Hello React123",
+      "content": "Hello React content ...\nEasy ...",
+      "tags": [
+        "react",
+        "hello",
+        "intro"
+      ],
+      "imageUrl": "https://www.publicdomainpictures.net/pictures/250000/velka/mars-1515656849bmH.jpg",
+      "authorId": 2,
+      "active": true
+    },
+    {
+      "id": 10,
+      "title": "sdfwe",
+      "content": "ewewewfrewf",
+      "tags": [
+        "refref",
+        "ferref",
+        "rfref"
+      ],
+      "imageUrl": "https://cdn.mos.cms.futurecdn.net/sfgpCc8Ba2GFWVLcPmBzcM.jpg",
+      "authorId": 2,
+      "active": true
+    },
+    {
+      "title": "SSE API",
+      "content": "SSE API is easy to use Promise-based web service client API.",
+      "authorId": 1,
+      "tags": [
+        "fetch",
+        "api",
+        "http",
+        "client"
+      ],
+      "status": "ACTIVE",
+      "id": 11
+    },
+    {
+      "id": 12,
+      "title": "Hello React",
+      "content": "Hello React",
+      "tags": "hello, react",
+      "imageUrl": "https://images.pexels.com/photos/4023972/pexels-photo-4023972.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+      "active": true,
+      "authorId": 1
+    },
+    {
+      "id": 13,
+      "title": "React Hooks",
+      "content": "React hooks provide useful features to functional React components...",
+      "tags": "react, hook",
+      "imageUrl": "https://images.pexels.com/photos/2684008/pexels-photo-2684008.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+      "active": true,
+      "authorId": 1
+    },
+    {
+      "id": 14,
+      "title": "dsadsfdsfds",
+      "content": "sdfsdfdsfsd",
+      "tags": [
+        "sdfsfs",
+        "sdfsdfsds"
+      ],
+      "imageUrl": "https://images.pexels.com/photos/2684008/pexels-photo-2684008.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+      "active": true,
+      "authorId": 1
+    },
+    {
+      "id": 15,
+      "title": "Demo Post",
+      "content": "Demo post content",
+      "tags": [
+        "post",
+        "demo"
+      ],
+      "imageUrl": "https://images.pexels.com/photos/87077/owl-horned-bird-bird-of-prey-87077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "active": true,
+      "authorId": 1
+    },
+    {
+      "id": 16,
+      "title": "test",
+      "content": "test content",
+      "tags": [
+        "test"
+      ],
+      "imageUrl": "https://images.pexels.com/photos/87077/owl-horned-bird-bird-of-prey-87077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "active": true,
+      "authorId": 1
+    },
+    {
+      "id": 17,
+      "title": "Easter Blog Post",
+      "content": "Easter is coming ...",
+      "tags": [
+        "easter",
+        "holidays"
+      ],
+      "imageUrl": "https://www.photos-public-domain.com/wp-content/uploads/2012/04/basket-full-of-easter-eggs.jpg",
+      "active": true,
+      "authorId": 1
+    },
+    {
+      "id": 18,
+      "title": "sdsdsadsa",
+      "content": "asdsadsad fvdfefvfevfe",
+      "tags": [
+        "asdsadsa"
+      ],
+      "imageUrl": "https://www.publicdomainpictures.net/pictures/160000/nahled/oeufs-de-paques-1457782172BLx.jpg",
+      "active": true,
+      "authorId": 1
+    },
+    {
+      "id": 19,
+      "title": "dwqdsaas",
+      "content": "sasasadsadsadsadsadsadsadsa",
+      "tags": [
+        "sadsa"
+      ],
+      "imageUrl": "https://www.publicdomainpictures.net/pictures/160000/nahled/oeufs-de-paques-1457782172BLx.jpg",
+      "active": true,
+      "authorId": 1
+    },
+    {
+      "id": 20,
+      "title": "To Route or Not to Route?",
+      "content": "React Router V6 makes routing easy ...",
+      "tags": [
+        "react",
+        "router",
+        "easy",
+        "routing"
+      ],
+      "imageUrl": "https://www.publicdomainpictures.net/pictures/70000/t2/pictures.jpg",
+      "active": true,
+      "authorId": 1
+    }
+  ],
+  "comments": []
+}
