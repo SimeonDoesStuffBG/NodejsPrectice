@@ -1,12 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import User from './components/user';
-import Recipe from './components/recipe';
+import SignIn from './Pages/SignIn';
 
 function App() {
   return (
     <div className="App">
-      <Recipe />
+     <SignIn />
     </div>
   );
 }
