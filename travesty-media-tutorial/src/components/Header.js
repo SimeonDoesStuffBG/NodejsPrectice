@@ -1,10 +1,11 @@
 import React from 'react'
+import Button from './Button'
 
 const Header = (props) => {
   return (
-    <header>
+    <header className='header'>
         <h1>Task Tracker</h1>
-        <h2>{props.title}</h2>
+        <Button color='green' text='Add'/>
     </header>
   )
 }
