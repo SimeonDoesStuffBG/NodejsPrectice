@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "text": "Doctor Appointment",
+      "day": "Feb 5th at 14:30",
+      "reminder": true
+    },
+    {
+      "id": 3,
+      "text": "Food Shopping",
+      "day": "Feb 5th at 14:30",
+      "reminder": true
+    },
+    {
+      "text": "Eat meat",
+      "day": "May 28th at 12:33",
+      "reminder": false,
+      "id": 4
+    },
+    {
+      "text": "Kill John Lenon",
+      "day": "May 29th at 9:32",
+      "reminder": true,
+      "id": 5
+    }
+  ]
+}
