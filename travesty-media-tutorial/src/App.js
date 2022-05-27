@@ -2,9 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
-import {useState,useEffect} from 'react'
+import React, {useState,useEffect} from 'react'
 import AddTask from './components/AddTask';
 import Footer from './components/Footer';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import About from './components/About';
 
 function App() {
 
@@ -80,12 +82,26 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Header onAddTask={()=>setShowAdd(!showAdd)} showAdd={showAdd}/>
-      {showAdd && <AddTask onAdd={addTask}/>}
-      <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/>
+    <Router>
+      <div className="App">
+        <Header onAddTask={()=>setShowAdd(!showAdd)} showAdd={showAdd}/>
+      
+        <Routes>
+          <Route 
+          path="/" exact
+          element={
+          <React.Fragment>
+          {showAdd && <AddTask onAdd={addTask}/>}
+          <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/>
+          </React.Fragment>
+          }
+          />
+      
+      <Route path="/about" element={<About/>}/>
+      </Routes>
       <Footer/>
     </div>
+    </Router>
   );
 }
 
