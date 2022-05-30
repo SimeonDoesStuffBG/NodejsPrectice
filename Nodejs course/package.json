@@ -4,7 +4,8 @@
   "description": "A nodejs example",
   "main": "index.js",
   "scripts": {
-    "test": "hi"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "author": "LeoTheBackgroundSheep",
   "license": "ISC",
