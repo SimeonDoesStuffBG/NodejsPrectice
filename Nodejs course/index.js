@@ -19,11 +19,12 @@ const server = http.createServer((req, res)=>{
     }
 
     if(req.url === '/api/users'){
-        fs.readFile(path.join(__dirname, 'public', 'about.html'),(err, content)=>{
-            if (err) throw err;
-            res.writeHead(200, {'Content-Type':'text/html'});
-            res.end(content);    
-        })
+        const users = [
+            {name:"dude", age:40},
+            {name:"mmm", age:32}
+        ]
+        res.writeHead(200,{'Content-Type':'application/json'});
+        res.end(JSON.stringify(users));
     }
 });
 
