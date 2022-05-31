@@ -1,27 +1,16 @@
 const express = require('express');
 const path = require('path');
+const moment = require('moment');
+const members = require('./members');
+
 const app = express();
 
-const members = [
-    {
-      id: 1,
-      name: 'John Doe',
-      email: 'john@gmail.com',
-      status: 'active'
-    },
-    {
-      id: 2,
-      name: 'Bob Williams',
-      email: 'bob@gmail.com',
-      status: 'inactive'
-    },
-    {
-      id: 3,
-      name: 'Shannon Jackson',
-      email: 'shannon@gmail.com',
-      status: 'active'
-    }
-  ];
+const logger = (req,res, next) =>{
+    console.log('Hello there.', `${req.protocol}://${req.get('host')}${req.originalUrl}:${moment().format()}`);
+    next();
+}
+
+app.use(logger);
 
 app.get('/api/members',(req,res)=>{
     res.json(members);
