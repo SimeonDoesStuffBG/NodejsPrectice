@@ -1,24 +1,18 @@
 const express = require('express');
 const path = require('path');
-const moment = require('moment');
-const members = require('./members');
-
+const logger = require('./middleware/logger');
 const app = express();
 
-const logger = (req,res, next) =>{
-    console.log('Hello there.', `${req.protocol}://${req.get('host')}${req.originalUrl}:${moment().format()}`);
-    next();
-}
+//logger
+//app.use(logger);
 
-app.use(logger);
-
-app.get('/api/members',(req,res)=>{
-    res.json(members);
-
-});
+//body parser
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 
 app.use(express.static(path.join(__dirname,'public')));
 
+app.use('/api/members', require('./routes/api/members'))
 //app.get('/', (req, res)=>{
     //res.sendFile(path.join(__dirname, 'public', 'index.html'));
 //});
