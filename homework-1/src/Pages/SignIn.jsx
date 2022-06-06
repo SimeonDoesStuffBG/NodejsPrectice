@@ -1,89 +1,48 @@
-import React, { Component } from 'react';
+import React, { Component,useState } from 'react';
 import {ACTIVE, Gender, NA, USER} from '../components/enums';
+import MyInput from '../components/MyInput';
 import { User } from '../components/user';
+import {PropTypes} from 'prop-types'
 
-class SignIn extends Component {
-    state = { 
-        username:'',
-        name:'',
-        pass:'',
-        pass2:'',
-        gender:NA
-     } 
+const SignIn = ({onSignIn})=> {    
 
-    SubmitSignIn= (event)=>{
-        event.preventDefault();
-        const Username = this.state.username.trim();
-        if(Username.length == 0||Username.length>15||Username != this.state.username){
-            alert("Invalid Username");
-            return;
-        }
+    const [username, setUsername]=useState('');
+    const [name, setName]=useState('');
+    const [password,setPassword]=useState('');
+    const [gender,setGender]=useState('');
+    const [repeatPass,setRepeatPass]=useState('');
 
-        const Pass = this.state.pass.trim();
-        if(Pass.length < 8 || Pass!=this.state.pass){
-            alert("invalid Password");
-            return;
-        }
-        if(Pass!=this.state.pass2){
-            alert("Passwords do not match");
-            return;
-        }
+    const onSubmit = (e)=>{
+        e.preventDefault();
 
-        const Name = this.state.name.trim();
-        if(Name.length<=0){
-            alert("You must Enter Username");
-            return;
-        }
+        const curDate=new Date().toString();
+        onSignIn({username,name,password,gender,curDate,curDate});
 
-        var user = new User("s",Name, Username,Pass,this.state.gender);
-        
-        var U = Window.localStoage.getItem('users');
-        console.log('FUCK');
-        var Users = (!U)? JSON.parse(U):[];
-        Users.push(user);
-        Window.localStoage.setItem('users', JSON.stringify(Users));
-
+        setUsername('');
+        setName('');
+        setPassword('');
+        setGender('');
+        setRepeatPass('');
     }
-
-    changeUN = (event) =>{
-        this.setState({username:event.target.value});
-    }
-
-    changePass = (event) =>{
-        this.setState({pass:event.target.value});
-    }
-
-    changePass2 = (event) =>{
-        this.setState({pass2:event.target.value});
-    }
-
-    changeName = (event) =>{
-        this.setState({name:event.target.value});
-    }
-
-    changeGender = (event) =>{
-        this.setState({gender:event.target.value});
-    }
-
     
-    render() { 
-        
-        return (
-            <form onSubmit={this.SubmitSignIn}>
-                <input type='text' placeholder='enter username' onChange={this.changeUN}/><br/>
-                <input type='password' placeholder='enter password' onChange={this.changePass}/><br/>
-                <input type='password' placeholder='repeat password' onChange={this.changePass2}/><br/>
-                <input type='text' placeholder='enter full name' onChange={this.changeName}/><br/>
-                <select id='gender' onChange={this.changeGender}>
-                    {Gender.map(g =>
-                        <option key={g} value={Gender.indexOf(g)}>{g}</option>)
-                    }
-                
-                </select><br/>
+       
+   return (
+       <form onSubmit={onSubmit}>
+       <table><tbody>
+            <MyInput type="text" name="Username" value={username} onValueChange={(e)=>setUsername(e.target.value)}/>
+            <MyInput type="password" name="Password" onValueChange={(e)=>setPassword(e.target.value)}/>
+            <MyInput name="Reenter Password" type="password" onValueChange={(e)=>setRepeatPass(e.target.value)}/>
+            <MyInput name="Full Name" onValueChange={e=>setName(e.target.value)}/>
+            <MyInput name="Gender" type="text" onValueChange={e=>setGender(e.target.value)}/>
+            </tbody></table>
+               
                 <input type='submit'/>
             </form>
         );
-    }
 }
  
+SignIn.propTypes={
+    onSignIn:PropTypes.func.isRequired
+}
+
 export default SignIn;

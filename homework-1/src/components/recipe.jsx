@@ -1,16 +1,16 @@
-export class Recipe{
-    constructor(id='',creatorID='',name='',briefDesc='',timeToCook=0,products=[],longDesc='',picture='',tags=[],){
-        this.id = id;
-        this.creatorID=creatorID;
-        this.name=name;
-        this.briefDesc=briefDesc;
-        this.timeToCook=timeToCook;
-        this.products= [...products];
-        this.longDesc=longDesc;
-        this.picture=picture;
-        this.tags=[...tags];  
-        this.createdAt=new Date().toString();
-        this.lastUpdate=this.createdAt;      
-    }
+import React from 'react'
+
+const Recipe = ({recipe,onDelete}) => {
+  return (
+    <div>
+        <h3>{recipe.title}</h3>
+        <img src={recipe.immage} alt="immage missing"></img>
+        <div>Ingredients<ul>{recipe.ingredients.map((ingredient)=>
+            <li key={ingredient.id}>{ingredient.name}</li>
+        )}</ul></div>
+    </div>
+  )
 }
+
+export default Recipe
  

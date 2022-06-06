@@ -2,7 +2,7 @@
 import { DISCONNECTED, NA, USER } from './enums';
 
 export class User {
-    constructor(id = '', name='', username='',password='',gender=NA, role=USER, picture='',status=DISCONNECTED){
+    constructor(id = '', name='', username='',password='',gender='', role=USER, picture='',status=DISCONNECTED){
         this.id=id;
         this.name=name;
         this.username=username;
