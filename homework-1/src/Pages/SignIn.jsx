@@ -29,11 +29,31 @@ const SignIn = ({onSignIn})=> {
    return (
        <form onSubmit={onSubmit}>
        <table><tbody>
-            <MyInput type="text" name="Username" value={username} onValueChange={(e)=>setUsername(e.target.value)}/>
-            <MyInput type="password" name="Password" onValueChange={(e)=>setPassword(e.target.value)}/>
-            <MyInput name="Reenter Password" type="password" onValueChange={(e)=>setRepeatPass(e.target.value)}/>
-            <MyInput name="Full Name" onValueChange={e=>setName(e.target.value)}/>
-            <MyInput name="Gender" type="text" onValueChange={e=>setGender(e.target.value)}/>
+           <tr>
+               <td><label htmlFor="username">Username</label></td>
+               <td><input type="text" id="username" value={username} onChange={e=>setUsername(e.target.value)}/></td>
+            </tr>
+            
+            <tr>
+               <td><label htmlFor="pass">Password</label></td>
+               <td><input type="password" id="pass" value={password} onChange={e=>setPassword(e.target.value)}/></td>
+            </tr>
+
+            <tr>
+               <td><label htmlFor="passRep">Reenter Password</label></td>
+               <td><input type="password" id="passRep" value={repeatPass} onChange={e=>setRepeatPass(e.target.value)}/></td>
+            </tr>
+
+            <tr>
+               <td><label htmlFor="naem">Full Name</label></td>
+               <td><input type="text" id="name" value={name} onChange={e=>setName(e.target.value)}/></td>
+            </tr>
+            
+            <tr>
+               <td><label htmlFor="gender">Gender</label></td>
+               <td><input type="text" id="gender" value={gender} onChange={e=>setGender(e.target.value)}/></td>
+            </tr>
+           
             </tbody></table>
                
                 <input type='submit'/>
