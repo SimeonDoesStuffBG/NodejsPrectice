@@ -48,7 +48,7 @@ function App() {
       },
       body:JSON.stringify(task)
     });
-
+    console.log(res);
     const newTask =await res.json();
     setTasks([...tasks, newTask]);
   }
@@ -72,7 +72,7 @@ function App() {
       },
       body:JSON.stringify(uppTask)
     })
-    console.log(res);
+  
 
     const data = await res.json();
 

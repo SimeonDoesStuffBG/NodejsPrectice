@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useCallback } from 'react';
 import './App.css';
 import Main from './Pages/Main'
 import Login from './Pages/Login'
@@ -10,17 +10,17 @@ function App() {
   const [user,setUser] = useState('');
 
   const addUser = async (user)=>{
-    const res = await fetch('http://localhost:5000/api/users',{
+    await fetch('http://localhost:5000/api/users',{
       method:'POST',
-      status:200,
       headers:{ 
-        'Content-type':'application/json' 
+        'Content-Type':'application/json' 
       },
       body:JSON.stringify(user)
-    });
-    console.log(res.body);
+    }).then(response => response.json())
+    .then(res => console.log(res));;
+    //console.log(user);
 
-    //const newUser=await res.json();
+
   }
 
   return (
