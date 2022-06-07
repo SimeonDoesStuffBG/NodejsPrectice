@@ -10,6 +10,7 @@ function App() {
   const [user,setUser] = useState('');
 
   const addUser = async (user)=>{
+    console.log(JSON.stringify(user));
     await fetch('http://localhost:5000/api/users',{
       method:'POST',
       headers:{ 
