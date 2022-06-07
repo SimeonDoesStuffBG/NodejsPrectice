@@ -44,17 +44,18 @@ router.get('/',(req,res)=>{
 });
 
 //add user
-router.post('/',(req,res)=>{
-    console.log(req.body);
+router.post('/',(req,res)=>{    
+    const user=JSON.parse(req.body);
+    console.log(user);
     const newUser={
-        username:req.username,
-        name:req.name,
-        password:req.password,
-        gender:req.gender,
+        username:req.body.username,
+        name:req.body.name,
+        password:req.body.password,
+        gender:req.body.gender,
         role:'User',
         status:'Active',
-        dateOfReg:req.dateOfReg,
-        dateOfLast:req.dateOfLast
+        dateOfReg:req.body.dateOfReg,
+        dateOfLast:req.body.dateOfLast
     }
 
     mongoClient.connect(dbUrl, {

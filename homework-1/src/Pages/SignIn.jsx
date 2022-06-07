@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {PropTypes} from 'prop-types'
+import MyInput from '../components/MyInput';
 
 const SignIn = ({onSignIn})=> {    
 
@@ -11,9 +12,12 @@ const SignIn = ({onSignIn})=> {
 
     const onSubmit = (e)=>{
         e.preventDefault();
-
-        const curDate=new Date().toString();
-        onSignIn({username,name,password,gender,curDate,curDate});
+        
+        
+        const dateOfReg=new Date().toString();
+        const dateOfLast=dateOfReg;
+        console.log(JSON.stringify({username,name,password,gender,dateOfReg,dateOfLast}));
+        onSignIn({username,name,password,gender,dateOfReg,dateOfLast});
 
         setUsername('');
         setName('');
@@ -26,31 +30,16 @@ const SignIn = ({onSignIn})=> {
    return (
        <form onSubmit={onSubmit}>
        <table><tbody>
-           <tr>
+           {/*<tr>
                <td><label htmlFor="username">Username</label></td>
                <td><input type="text" id="username" value={username} onChange={e=>setUsername(e.target.value)}/></td>
-            </tr>
-            
-            <tr>
-               <td><label htmlFor="pass">Password</label></td>
-               <td><input type="password" id="pass" value={password} onChange={e=>setPassword(e.target.value)}/></td>
-            </tr>
+   </tr>*/}
 
-            <tr>
-               <td><label htmlFor="passRep">Reenter Password</label></td>
-               <td><input type="password" id="passRep" value={repeatPass} onChange={e=>setRepeatPass(e.target.value)}/></td>
-            </tr>
-
-            <tr>
-               <td><label htmlFor="naem">Full Name</label></td>
-               <td><input type="text" id="name" value={name} onChange={e=>setName(e.target.value)}/></td>
-            </tr>
-            
-            <tr>
-               <td><label htmlFor="gender">Gender</label></td>
-               <td><input type="text" id="gender" value={gender} onChange={e=>setGender(e.target.value)}/></td>
-            </tr>
-           
+            <MyInput name="Username" type="text" value={username} onValueChange={e=>setUsername(e.target.value)}/>
+            <MyInput name="Password" type="password" value={password} onValueChange={e=>setPassword(e.target.value)}/>
+            <MyInput name="Reenter Password" type="password" value={repeatPass} onValueChange={e=>setRepeatPass(e.target.value)}/>
+            <MyInput name="Full Name" type="text" value={name} onValueChange={e=>setName(e.target.value)}/>
+            <MyInput name="Gender" type="text" value={gender} onValueChange={e=>setGender(e.target.value)}/>
             </tbody></table>
                
                 <input type='submit'/>

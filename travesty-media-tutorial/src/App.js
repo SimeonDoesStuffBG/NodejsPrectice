@@ -72,6 +72,7 @@ function App() {
       },
       body:JSON.stringify(uppTask)
     })
+    console.log(res);
 
     const data = await res.json();
 
