@@ -45,6 +45,7 @@ router.get('/',(req,res)=>{
 
 //add user
 router.post('/',(req,res)=>{
+    console.log(req.body);
     const newUser={
         username:req.username,
         name:req.name,

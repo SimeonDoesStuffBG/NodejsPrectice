@@ -1,7 +1,4 @@
-import React, { Component,useState } from 'react';
-import {ACTIVE, Gender, NA, USER} from '../components/enums';
-import MyInput from '../components/MyInput';
-import { User } from '../components/user';
+import React, { useState } from 'react';
 import {PropTypes} from 'prop-types'
 
 const SignIn = ({onSignIn})=> {    
