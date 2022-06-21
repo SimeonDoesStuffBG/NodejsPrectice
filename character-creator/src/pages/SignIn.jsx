@@ -30,11 +30,6 @@ const SignIn = ({onSignIn})=> {
    return (
        <form onSubmit={onSubmit}>
        <table><tbody>
-           {/*<tr>
-               <td><label htmlFor="username">Username</label></td>
-               <td><input type="text" id="username" value={username} onChange={e=>setUsername(e.target.value)}/></td>
-   </tr>*/}
-
             <MyInput name="Username" type="text" value={username} onValueChange={e=>setUsername(e.target.value)}/>
             <MyInput name="Password" type="password" value={password} onValueChange={e=>setPassword(e.target.value)}/>
             <MyInput name="Reenter Password" type="password" value={repeatPass} onValueChange={e=>setRepeatPass(e.target.value)}/>

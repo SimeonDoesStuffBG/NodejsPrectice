@@ -50,3 +50,20 @@ body {
       transform: rotate(360deg);
     }
   }
+
+  
+  .ThumbnailChar {
+    height:25%;
+    width:25%;
+    background-color: lightcyan;
+
+    img{
+      border:1px lime;
+    }
+
+    p{
+      color:gray;
+    }
+
+  }
+  

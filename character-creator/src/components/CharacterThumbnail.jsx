@@ -1,20 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-const CharacterThumbnail = (immage,name,creator,createdOn) => {
+
+const CharacterThumbnail = ({picture,name,creator,createdOn}) => {
   return (
-    <div>
-        <img src= {immage} alt="Thumbnail"></img>
+    <div className="ThumbnailChar">
+        <img src= {picture} alt="Thumbnail"/>
         <h5>{name}</h5>
-        <p><span>{creator}</span><span>{createdOn}</span></p>
+        <p><span>{creator}</span> <span>{createdOn}</span></p>
     </div>
   )
 }
 
 CharacterThumbnail.propTypes = {
-    immage:PropTypes.string,
+    picture:PropTypes.string,
     name:PropTypes.string.isRequired,
     creator:PropTypes.string.isRequired,
-    date:PropTypes.string.isRequired
+    createdOn:PropTypes.string.isRequired
 }
 
 export default CharacterThumbnail
