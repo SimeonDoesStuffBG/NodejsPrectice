@@ -51,6 +51,18 @@ body {
     }
   }
 
+  .user{
+    float:right;
+
+    a{
+      margin:3px;
+    }
+
+    .userEnter{
+      margin: 3px;
+      background-color:lightyellow;
+    }
+  }
   
   .ThumbnailChar {
     height:25%;

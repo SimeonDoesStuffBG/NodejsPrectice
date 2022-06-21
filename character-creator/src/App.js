@@ -16,7 +16,7 @@ function App() {
     let data = await res.json();
     data=data.filter(user=>user.username===username||user.email===email);
 
-    console.log(data[0]);
+    //console.log(data[0]);
     return data[0];
   }
 
@@ -35,7 +35,7 @@ function App() {
       alert("User already exists");
       return false;
     }
-    const res = await fetch(`${serverURL}users`,{
+    await fetch(`${serverURL}users`,{
       method:'POST',
       headers:{ 
         'Content-type':'application/json'
@@ -45,10 +45,10 @@ function App() {
     return true;
   }
 
-  console.log(user!=-1);
+  
   return (
     <Router className="App">
-      <Nav loggedUser={user!=-1}/>
+      <Nav loggedUser={user}/>
       <Routes>
         
         <Route path="/" exact element={<Main />}/>

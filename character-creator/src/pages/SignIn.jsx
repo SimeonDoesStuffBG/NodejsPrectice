@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {PropTypes} from 'prop-types'
+import {PropTypes} from 'prop-types';
+import {useNavigate} from 'react-router-dom';
 import MyInput from '../components/MyInput';
 
 const SignIn = ({onSignIn})=> {    
@@ -8,6 +9,8 @@ const SignIn = ({onSignIn})=> {
     const [email, setEmail]=useState('');
     const [password,setPassword]=useState('');
     const [repeatPass,setRepeatPass]=useState('');
+
+    const nav = useNavigate();
 
     const onSubmit = (e)=>{
         e.preventDefault();
@@ -38,6 +41,7 @@ const SignIn = ({onSignIn})=> {
             setEmail('');
             setPassword('');
             setRepeatPass('');
+            nav('/login');
         }
 }
     

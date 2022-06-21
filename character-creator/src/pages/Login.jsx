@@ -1,13 +1,22 @@
-import React, {useState} from 'react'
-import MyInput from '../components/MyInput'
-import {PropTypes} from 'prop-types'
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import MyInput from '../components/MyInput';
+import {PropTypes} from 'prop-types';
 
 const Login = ({onLogIn}) => {
   const [username,setUsername]=useState('');
   const [password,setPassword]=useState('');
 
+  const nav = useNavigate();
+
   const onSubmit = (e)=>{
-    
+    e.preventDefault();
+
+    if(onLogIn(username, password)){
+      setUsername('');
+      setPassword('');
+      nav('/')
+    }
   }
 
   return (
