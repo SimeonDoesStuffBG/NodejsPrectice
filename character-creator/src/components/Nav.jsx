@@ -17,7 +17,7 @@ const Nav = ({loggedUser}) => {
         }
         
         getUsername();
-    }, []);
+    }, [loggedUser]);
 
   return (
     <div>

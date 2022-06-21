@@ -62,18 +62,33 @@ body {
       margin: 3px;
       background-color:lightyellow;
     }
+    
+    p {
+      font-size: large;
+    }
   }
   
   .ThumbnailChar {
-    height:25%;
-    width:25%;
+    padding:10px;
+    height:180px;
+    width:320px;
     background-color: lightcyan;
-
+    margin:4px;
     img{
-      border:1px lime;
+      display:block;
+      margin-left:auto;
+      margin-right:auto;
+      height:120px;
+      width:260px;
+      background-color: darkblue;
+    }
+
+    h4{
+      float:left;
     }
 
     p{
+      float:right;
       color:gray;
     }
 
