@@ -66,8 +66,8 @@ function App() {
     return true;
   }
 
-  onCreateCharacter=async (char)=>{
-    
+  const onCreateCharacter=async (char)=>{
+    return true;
   }
   
   return (
