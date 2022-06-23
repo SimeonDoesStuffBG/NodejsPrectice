@@ -1,9 +1,9 @@
 import React, { useState} from 'react'
 import { Link } from 'react-router-dom';
+import CharacterThumbnail from '../components/CharacterThumbnail';
 
-const UserPage = ({user, isLogged}) => {
+const UserPage = ({user, isLogged, characters}) => {
    
-    const [characters, setCharacters]=useState([]);
     const [stories, setStories]=useState([]);
   return (
     <div>
@@ -11,6 +11,8 @@ const UserPage = ({user, isLogged}) => {
         <div className="charSheet">
             <h4>Characters</h4>
             {isLogged && <Link to="/character-creator"><button>Create New Character</button></Link>}
+            {characters.map(char=><CharacterThumbnail key={char.id} character={char}/>)}
+            {characters.length===0 && <p>This user has no characters</p>}
         </div> 
         <div className="storySheet">
             <h4>Stories</h4>

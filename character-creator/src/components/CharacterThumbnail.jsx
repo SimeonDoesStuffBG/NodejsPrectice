@@ -1,26 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const CharacterThumbnail = ({picture,name,creator}) => {
+const CharacterThumbnail = ({character}) => {
+  
+  const [creator,setCreator]=useState('');
+
+  useEffect(()=>{
+    const getCreator = async()=>{
+      const theCreator = await fetch(`http://localhost:5000/users/${character.creator}`);
+      const data =await theCreator.json();
+      setCreator(data.username);
+    }
+    getCreator();
+  },[]
+  )
+
   return (
  
-    //<Link to={`/character=${character.id}`} className="ThumbnailChar">
-    <div className="ThumbnailChar">
-        <img src= {picture} alt="Thumbnail"/>
+    <div  className="ThumbnailChar">
+    <Link to={`/character=${character.id}`}>
+        <img src= {character.picture} alt="Thumbnail"/>
         <div>
-          <h4>{name}</h4>
+          <h4>{character.name}</h4>
           <p>{creator}</p>
         </div>
+    </Link>
     </div>
-   // </Link>
   )
 }
 
-CharacterThumbnail.propTypes = {
-    picture:PropTypes.string,
-    name:PropTypes.string.isRequired,
-    creator:PropTypes.string.isRequired,
-}
+
 
 export default CharacterThumbnail

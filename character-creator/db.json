@@ -41,15 +41,42 @@
       "id": 7
     }
   ],
-  "characters":[
-
+  "characters": [
+    {
+      "name": "John",
+      "creator": 6,
+      "gender": "nb",
+      "description": "Hi, I'm bob.",
+      "relationships": {
+        "Friends": [],
+        "Enemies": [],
+        "Family": [],
+        "Lovers": []
+      },
+      "featuredIn": [],
+      "createdOn": "2022-06-23T20:38:24.298Z",
+      "upDatedOn": "2022-06-23T20:38:24.298Z",
+      "id": 1
+    },
+    {
+      "name": "Paul",
+      "creator": 3,
+      "gender": "",
+      "description": "Somebody Once Told me\nThe World is gonna roll me",
+      "relationships": {
+        "Friends": [],
+        "Enemies": [],
+        "Family": [],
+        "Lovers": []
+      },
+      "featuredIn": [],
+      "createdOn": "2022-06-23T20:59:30.045Z",
+      "upDatedOn": "2022-06-23T20:59:30.045Z",
+      "id": 2
+    }
   ],
-  "plotpoints":[
-
-  ],
-  "stories":[
-    
-  ],
+  "plotpoints": [],
+  "stories": [],
   "posts": [
     {
       "id": 1,

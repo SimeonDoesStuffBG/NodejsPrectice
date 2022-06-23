@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CharacterThumbnail from '../components/CharacterThumbnail';
 import logo from '../logo.svg';
 
-const Main = () => {
+const Main = ({characters}) => {
+
   return (
-    <div>
-         <CharacterThumbnail picture={logo} name="John" creator = "LeoTheBackgroundSheep"/>
+    <div className="Characters">
+         {characters.map(character=><CharacterThumbnail key={character.id} character={character}/>)}
     </div>
   )
 }

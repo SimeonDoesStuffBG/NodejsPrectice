@@ -12,18 +12,45 @@ const CharacterCreator = ({onCreate,creator}) => {
     const [name, setName] = useState('');
     const [gender, setGender]=useState('');
     const [description, setDescription]=useState('');
+    
     const onCreateChar=()=>{
+        if(name.trim()===''||name.trim()!=name){
+            alert('You must enter a valid name');
+            return;
+        }
+        if(gender==='')
+            setGender('NA');
 
+        const CreatedOn = new Date();
+        const UpdatedOn = CreatedOn;
+       
+
+        onCreate({name:name, 
+            creator:creator, 
+            gender:gender, 
+            description:description, 
+            relationships:{
+                Friends:[],
+                Enemies:[],
+                Family:[],
+                Lovers:[]
+            },
+            featuredIn:[],
+            createdOn:CreatedOn,
+            upDatedOn:UpdatedOn});
+        setName('');
+        setGender('');
+        setDescription('');
     }
 
   return (
-    <form>
-        <table>
-            <MyInput name="Name"/>
-            <MyInput name="Gender"/>
-            <MyInput type="textarea" name="Description"/>
+    <form onSubmit={onCreateChar}>
+        <table><tbody>
+            <MyInput name="Name" value={name} onValueChange={e=>setName(e.target.value)}/>
+            <MyInput name="Gender" value={gender} onValueChange={e=>setGender(e.target.value)}/>
+            <MyInput type="textarea" name="Description" value={description} onValueChange={e=>setDescription(e.target.value)}/>
             <MyInput type="file" name="Picture"/>
-        </table>
+        </tbody></table>
         <input type="submit" value="Create Character"/>
     </form>
   )

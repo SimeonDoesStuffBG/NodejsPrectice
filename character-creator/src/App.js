@@ -6,13 +6,16 @@ import {useState, useEffect} from 'react';
 import Login from './pages/Login';
 import UserPage from './pages/UserPage';
 import CharacterCreator from './pages/CharacterCreator';
+import CharacterPage from './pages/CharacterPage';
 
 function App() {
   const serverURL = "http://localhost:5000/";
 
   const [users, setUsers]= useState([]);
   const [user,setUser] = useState(-1);
+  const [characters,setCharacters]=useState([]);
 
+ 
   useEffect(() => {
     const getUsers = async()=>{
       const usersFromServer = await fetchUsers();
@@ -76,16 +79,34 @@ function App() {
     })
     return true;
   }
-  
+
+  useEffect(()=>{
+    const CharSet = async()=>{
+      const chars = await fetchCharacters();
+      console.log(chars);
+      setCharacters(chars);
+    } 
+
+    CharSet();
+  },[])
+
+  const fetchCharacters = async()=>{
+    const chars = await fetch(`${serverURL}characters`);
+    const data = await chars.json();
+
+    return data;
+  } 
+
   return (
     <Router className="App">
       <Nav loggedUser={user}/>
       <Routes>
-        <Route path="/" exact element={<Main />}/>
+        <Route path="/" exact element={<Main characters={characters}/>}/>
         <Route path="/signin" element={<SignIn onSignIn={onSignIn}/>}/>
         <Route path="/login" element={<Login onLogIn={onLogIn}/>}/>
         <Route path="/character-creator" element={<CharacterCreator onCreate={onCreateCharacter} creator={user}/>}/>
-        {users.map(thisUser=><Route key={thisUser.id} path={`/user=${thisUser.id}`} element={<UserPage user={thisUser} isLogged={thisUser.id===user}/>}/>)}
+        {characters.map(character=><Route key={character.id} path={`/character=${character.id}`} element={<CharacterPage char={character}/>}/>)}
+        {users.map(thisUser=><Route key={thisUser.id} path={`/user=${thisUser.id}`} element={<UserPage user={thisUser} isLogged={thisUser.id===user} characters={characters.filter(char=>char.creator===thisUser.id)}/>}/>)}
       </Routes>
     </Router>
   );
