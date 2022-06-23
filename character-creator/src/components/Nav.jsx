@@ -23,7 +23,7 @@ const Nav = ({loggedUser}) => {
         <Link to="/"> Main Page</Link>
         <div className="user">
             {loggedUser===-1 ? <div className="userEnter">
-            <Link to="/sigin">Sign in</Link>
+            <Link to="/signin">Sign in</Link>
             |<Link to="/login">Log in</Link>
             </div> : <Link to={`/user=${loggedUser}`}><p>{user.username}</p></Link>}
         </div>

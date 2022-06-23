@@ -1,17 +1,18 @@
 import React, { useState} from 'react'
+import { Link } from 'react-router-dom';
 
-const UserPage = ({user}) => {
-    console.log(user.username);
-
+const UserPage = ({user, isLogged}) => {
+   
     const [characters, setCharacters]=useState([]);
     const [stories, setStories]=useState([]);
   return (
     <div>
         <h1>{user.username}</h1>
-        <div class="charSheet">
+        <div className="charSheet">
             <h4>Characters</h4>
+            {isLogged && <Link to="/character-creator"><button>Create New Character</button></Link>}
         </div> 
-        <div class="storySheet">
+        <div className="storySheet">
             <h4>Stories</h4>
         </div>
     </div>

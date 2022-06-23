@@ -67,6 +67,13 @@ function App() {
   }
 
   const onCreateCharacter=async (char)=>{
+    const res=await fetch(`${serverURL}characters`,{
+      method:'POST',
+      headers:{ 
+        'Content-type':'application/json'
+      },
+      body:JSON.stringify(char)
+    })
     return true;
   }
   
@@ -74,12 +81,11 @@ function App() {
     <Router className="App">
       <Nav loggedUser={user}/>
       <Routes>
-        
         <Route path="/" exact element={<Main />}/>
-        <Route path="/sigin" element={<SignIn onSignIn={onSignIn}/>}/>
+        <Route path="/signin" element={<SignIn onSignIn={onSignIn}/>}/>
         <Route path="/login" element={<Login onLogIn={onLogIn}/>}/>
-        <Route path="/character-creator" element={<CharacterCreator onCreate={onCreateCharacter}/>}/>
-        {users.map(user=><Route key={user.id} path={`/user=${user.id}`} element={<UserPage user={user}/>}/>)}
+        <Route path="/character-creator" element={<CharacterCreator onCreate={onCreateCharacter} creator={user}/>}/>
+        {users.map(thisUser=><Route key={thisUser.id} path={`/user=${thisUser.id}`} element={<UserPage user={thisUser} isLogged={thisUser.id===user}/>}/>)}
       </Routes>
     </Router>
   );
