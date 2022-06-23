@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const CharacterThumbnail = ({picture,name,creator}) => {
   return (
-    <div className="ThumbnailChar">
+    <Link /*to={`/character=${character.id}`}*/ className="ThumbnailChar">
         <img src= {picture} alt="Thumbnail"/>
         <div>
           <h4>{name}</h4>
           <p>{creator}</p>
         </div>
-    </div>
+    </Link>
   )
 }
 

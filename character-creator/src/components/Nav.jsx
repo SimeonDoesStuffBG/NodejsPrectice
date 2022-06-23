@@ -3,20 +3,19 @@ import {Link} from 'react-router-dom'
 import {PropTypes} from 'prop-types'
 
 const Nav = ({loggedUser}) => {
-    const [username,setUsername] =useState('');
+    const [user,setUser] =useState({});
 
     useEffect(()=>{
-        const getUsername = async() =>{
-            let data = '';
+        const getUser = async() =>{
+        
             if(loggedUser!=-1){
                 const user = await fetch(`http://localhost:5000/users/${loggedUser}`);
-                const newUser = await user.json();
-                data = newUser.username;
+                const data = await user.json();
+                setUser(data);
             }
-            setUsername(data);
         }
         
-        getUsername();
+        getUser();
     }, [loggedUser]);
 
   return (
@@ -26,7 +25,7 @@ const Nav = ({loggedUser}) => {
             {loggedUser===-1 ? <div className="userEnter">
             <Link to="/sigin">Sign in</Link>
             |<Link to="/login">Log in</Link>
-            </div> : <p>{username}</p>}
+            </div> : <Link to={`/user=${loggedUser}`}><p>{user.username}</p></Link>}
         </div>
     </div>
   )
