@@ -7,8 +7,14 @@ const Main = ({characters, stories}) => {
 
   return (
     <div className="list-layout">
-        <CharacterList characters={characters} />
-        <StoryList stories={stories} />
+        <div>
+          <h3>Characters</h3>
+          <CharacterList characters={characters} />
+        </div>
+        <div>
+          <h3>Stories</h3>
+          <StoryList stories={stories} />
+        </div>
     </div>
   )
 }
