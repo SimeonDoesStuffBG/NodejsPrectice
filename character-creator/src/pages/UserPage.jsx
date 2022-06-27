@@ -5,7 +5,6 @@ import CharacterThumbnail from '../components/CharacterThumbnail';
 
 const UserPage = ({user, isLogged, characters}) => {
    
-    const [stories, setStories]=useState([]);
   return (
     <div>
         <h1>{user.username}</h1>

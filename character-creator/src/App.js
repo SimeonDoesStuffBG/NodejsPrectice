@@ -14,7 +14,7 @@ function App() {
   const [users, setUsers]= useState([]);
   const [user,setUser] = useState(-1);
   const [characters,setCharacters]=useState([]);
-
+  const [stories, setStories]=useState([]);
  
   useEffect(() => {
     const getUsers = async()=>{
@@ -101,12 +101,18 @@ function App() {
     <Router className="App">
       <Nav loggedUser={user}/>
       <Routes>
-        <Route path="/" exact element={<Main characters={characters}/>}/>
+        <Route path="/" exact element={<Main characters={characters} stories={stories}/>}/>
         <Route path="/signin" element={<SignIn onSignIn={onSignIn}/>}/>
         <Route path="/login" element={<Login onLogIn={onLogIn}/>}/>
         <Route path="/character-creator" element={<CharacterCreator onCreate={onCreateCharacter} creator={user}/>}/>
         {characters.map(character=><Route key={character.id} path={`/character=${character.id}`} element={<CharacterPage char={character}/>}/>)}
-        {users.map(thisUser=><Route key={thisUser.id} path={`/user=${thisUser.id}`} element={<UserPage user={thisUser} isLogged={thisUser.id===user} characters={characters.filter(char=>char.creator===thisUser.id)}/>}/>)}
+        {users.map(thisUser=>
+          <Route key={thisUser.id} 
+            path={`/user=${thisUser.id}`} 
+            element={<UserPage user={thisUser} 
+            isLogged={thisUser.id===user} 
+            characters={characters.filter(char=>char.creator===thisUser.id)} 
+            stories={stories.filter(story=>story.creator===thisUser.id)}/>}/>)}
       </Routes>
     </Router>
   );

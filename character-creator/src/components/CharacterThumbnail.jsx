@@ -18,7 +18,7 @@ const CharacterThumbnail = ({character}) => {
 
   return (
  
-    <div  className="ThumbnailChar">
+    <div className="Thumbnail-char">
     <Link to={`/character=${character.id}`}>
         <img src= {character.picture} alt="Thumbnail"/>
         <div>

@@ -10,9 +10,9 @@ const CharacterList = ({characters}) => {
 
     return (
     
-    <div className="characterList">
+    <div className="list-container">
         <input type="text" value={filter} onChange={e=>setFilter(e.target.value)} placeholder="SearchCharacter"/>
-        {characters.filter(char=>lookFor(char.name,filter)).map(character=><CharacterThumbnail key={character.id} character={character}/>)}
+        <div className="list">{characters.filter(char=>lookFor(char.name,filter)).map(character=><CharacterThumbnail key={character.id} character={character}/>)}</div>
     </div>
   )
 }

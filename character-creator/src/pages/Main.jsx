@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import CharacterList from '../components/CharacterList';
-import CharacterThumbnail from '../components/CharacterThumbnail';
+import StoryList from '../components/StoryList';
 import logo from '../logo.svg';
 
-const Main = ({characters}) => {
+const Main = ({characters, stories}) => {
 
   return (
-    <div className="Characters">
+    <div className="list-layout">
         <CharacterList characters={characters} />
+        <StoryList stories={stories} />
     </div>
   )
 }

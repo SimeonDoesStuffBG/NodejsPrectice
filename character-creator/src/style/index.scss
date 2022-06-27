@@ -1,4 +1,6 @@
-   .user{
+$ThumbnailWidth:320px;
+  
+  .user{
     float:right;
 
     a{
@@ -15,32 +17,74 @@
     }
   }
   
-  .characterList{
-    display:grid;
+  .list{
+    margin: 10px;
+    column-gap:20px;
+    column-width: $ThumbnailWidth;
+    
+    &-container{
+      display:grid;
+    }
+
+    &-layout{
+      column-count: 2;
+    }
   }
 
-  .ThumbnailChar {
-    padding:10px;
-    height:180px;
-    width:320px;
-    background-color: lightcyan;
-    margin:4px;
-    img{
-      display:block;
-      margin-left:auto;
-      margin-right:auto;
-      height:120px;
-      width:260px;
-      background-color: darkblue;
-    }
+  
 
-    h4{
-      float:left;
-    }
+  .Thumbnail {
+    &-char{
+      padding:10px;
+      height:180px;
+      width:$ThumbnailWidth;
+      margin:4px;
+  
+      background-color: lightcyan;
+      
+      img{
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        height:120px;
+        width:260px;
+        background-color: darkblue;
+      }
 
-    p{
-      float:right;
-      color:gray;
+      h4{
+        float:left;
+      }
+  
+      p{
+        float:right;
+        color:gray;
+      }
+  }
+    &-story{
+      padding:10px;
+      height:180px;
+      width:$ThumbnailWidth;
+      margin:4px;
+  
+      background-color: lightcoral;
+
+      img{
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        height:120px;
+        width:$ThumbnailWidth;
+        background-color: crimson;
+      }
+
+      h4{
+        float:left;
+      }
+  
+      p{
+        float:right;
+        color:gray;
+      }
     }
 
   }
