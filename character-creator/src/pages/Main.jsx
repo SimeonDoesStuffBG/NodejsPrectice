@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import CharacterList from '../components/CharacterList';
 import CharacterThumbnail from '../components/CharacterThumbnail';
 import logo from '../logo.svg';
 
@@ -6,7 +7,7 @@ const Main = ({characters}) => {
 
   return (
     <div className="Characters">
-         {characters.map(character=><CharacterThumbnail key={character.id} character={character}/>)}
+        <CharacterList characters={characters} />
     </div>
   )
 }

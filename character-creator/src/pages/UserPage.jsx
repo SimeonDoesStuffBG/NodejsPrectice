@@ -1,5 +1,6 @@
 import React, { useState} from 'react'
 import { Link } from 'react-router-dom';
+import CharacterList from '../components/CharacterList';
 import CharacterThumbnail from '../components/CharacterThumbnail';
 
 const UserPage = ({user, isLogged, characters}) => {
@@ -11,11 +12,12 @@ const UserPage = ({user, isLogged, characters}) => {
         <div className="charSheet">
             <h4>Characters</h4>
             {isLogged && <Link to="/character-creator"><button>Create New Character</button></Link>}
-            {characters.map(char=><CharacterThumbnail key={char.id} character={char}/>)}
+            <CharacterList characters={characters}/>
             {characters.length===0 && <p>This user has no characters</p>}
         </div> 
         <div className="storySheet">
             <h4>Stories</h4>
+            {isLogged && <Link to="/story-creator"><button>Create New Story</button></Link>}
         </div>
     </div>
   )

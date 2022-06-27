@@ -73,6 +73,38 @@
       "createdOn": "2022-06-23T20:59:30.045Z",
       "upDatedOn": "2022-06-23T20:59:30.045Z",
       "id": 2
+    },
+    {
+      "name": "Duncan",
+      "creator": 6,
+      "gender": "M",
+      "description": "A cool dude",
+      "relationships": {
+        "Friends": [],
+        "Enemies": [],
+        "Family": [],
+        "Lovers": []
+      },
+      "featuredIn": [],
+      "createdOn": "2022-06-27T10:12:07.115Z",
+      "upDatedOn": "2022-06-27T10:12:07.115Z",
+      "id": 3
+    },
+    {
+      "name": "Leo",
+      "creator": 6,
+      "gender": "",
+      "description": "My mate",
+      "relationships": {
+        "Friends": [],
+        "Enemies": [],
+        "Family": [],
+        "Lovers": []
+      },
+      "featuredIn": [],
+      "createdOn": "2022-06-27T10:20:28.953Z",
+      "upDatedOn": "2022-06-27T10:20:28.953Z",
+      "id": 4
     }
   ],
   "plotpoints": [],

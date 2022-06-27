@@ -13,7 +13,8 @@ const CharacterCreator = ({onCreate,creator}) => {
     const [gender, setGender]=useState('');
     const [description, setDescription]=useState('');
     
-    const onCreateChar=()=>{
+    const onCreateChar=(e)=>{
+        e.preventDefault();
         if(name.trim()===''||name.trim()!=name){
             alert('You must enter a valid name');
             return;
