@@ -3,13 +3,23 @@ import {PropTypes} from 'prop-types';
 import {useNavigate} from 'react-router-dom';
 import MyInput from '../components/MyInput';
 
-const CharacterCreator = ({onCreate,creator,otherChars}) => {
+const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
     const nav = useNavigate();
 
     useEffect(()=>{    
         console.log(otherChars)
         if(creator===-1){//if a user is not logged in we get redirected back to the main page
         nav("/");
+        }
+        if(curChar!==null){
+            setName(curChar.name);
+            setGender(curChar.gender);
+            setDescription(curChar.description);
+
+            setFriends(curChar.relationships.Friends);
+            setEnemies(curChar.relationships.Enemies);
+            setRelatives(curChar.relationships.Famuly);
+            setLovers(curChar.relationships.Lovers);
         }
         },[]
     )
@@ -56,6 +66,8 @@ const CharacterCreator = ({onCreate,creator,otherChars}) => {
 
    
  return (
+    <div>
+    <h1>Character {curChar===null?"Creator":"Editor"}</h1>
     <form onSubmit={onCreateChar}>
         <table><tbody>
             <MyInput name="Name" value={name} onValueChange={e=>setName(e.target.value)}/>
@@ -138,6 +150,7 @@ const CharacterCreator = ({onCreate,creator,otherChars}) => {
         </table>}
         <input type="submit" value="Create Character"/>
     </form>
+    </div>
   )
 }
 
@@ -145,5 +158,9 @@ CharacterCreator.propTypes = {
     onCreate:PropTypes.func.isRequired,
     creator:PropTypes.number
 }
+
+CharacterCreator.defaultProps = {
+    curChar:null
+  }
 
 export default CharacterCreator

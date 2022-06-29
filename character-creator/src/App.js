@@ -7,7 +7,6 @@ import Login from './pages/Login';
 import UserPage from './pages/UserPage';
 import CharacterCreator from './pages/CharacterCreator';
 import CharacterPage from './pages/CharacterPage';
-import CharacterEditor from './pages/CharacterEditor';
 import StoryCreator from './pages/StoryCreator';
 import StoryPage from './pages/StoryPage';
 
@@ -31,6 +30,13 @@ function App() {
   const fetchUsers = async()=>{
     const res = await fetch(`${serverURL}users`);
     let data = await res.json();
+
+    return data;
+  }
+
+  const fetchCharacter = async(id)=>{
+    const res = await fetch(`${serverURL}charactes/${id}`);
+    const data = await res.json();
 
     return data;
   }
@@ -95,6 +101,33 @@ function App() {
     setStories([...stories,res.json()]);
   } 
 
+  const onEditCharacter = async (character)=>{
+    const charToUpdate = await fetchCharacter(character.id);
+    const upChar = {...charToUpdate,
+       name:character.name, 
+       gender:character.gender,
+       description:character.description,
+
+       relationships:[
+        character.relationships.Friends,
+        character.relationships.Enemies,
+        character.relationships.Family,
+        character.relationships.Lovers 
+       ]
+      }
+
+    const res = await fetch(`${serverURL}characters`,{
+      method:'PUT',
+      headers:{
+        'Content-type':'application/json'
+      },
+      body:JSON.stringify(upChar)
+    })
+    const data = await res.json();
+
+ 
+  }
+
   useEffect(()=>{
     const Init = async()=>{
       const chars = await fetchCharacters();
@@ -140,8 +173,10 @@ function App() {
               />}/>
               <Route
                 path={`character=${character.id}/editor`}
-                element={<CharacterEditor character={character} 
-                relatedChars={characters.filter(char=>char.creator===character.creator)}
+                element={<CharacterCreator
+                curChar={character}
+                onCreate={onEditCharacter}
+                otherChars={characters.filter(char=>char.creator===character.creator)}
                 creator={user}/>}/>
             </React.Fragment>
             )}

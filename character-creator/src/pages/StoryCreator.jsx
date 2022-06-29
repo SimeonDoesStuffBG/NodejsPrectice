@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MyInput from '../components/MyInput'
 import {useNavigate} from 'react-router-dom';
 
-const StoryCreator = ({onCreate, creator, characters}) => {
+const StoryCreator = ({curStory,onCreate, creator, characters}) => {
 
     const nav= useNavigate();
 
@@ -62,6 +62,10 @@ const StoryCreator = ({onCreate, creator, characters}) => {
         <input type="submit" value="Create new Story"/>
     </form>
   )
-}
+  }
+
+  StoryCreator.defaultProps = {
+    curStory:null
+  }
 
 export default StoryCreator
