@@ -34,7 +34,13 @@ $ThumbnailWidth:320px;
     }
   }
 
-  
+  .characterThing{
+    list-style-type: none;
+    padding:3px;
+    margin:2px;
+    border:2px solid darkblue;
+    background-color:lightblue;
+  }
 
   .Thumbnail {
     &-char{

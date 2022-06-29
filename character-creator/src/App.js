@@ -2,12 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './pages/SignIn';
 import Main from './pages/Main';
 import Nav from './components/Nav';
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Login from './pages/Login';
 import UserPage from './pages/UserPage';
 import CharacterCreator from './pages/CharacterCreator';
 import CharacterPage from './pages/CharacterPage';
 import CharacterEditor from './pages/CharacterEditor';
+import StoryCreator from './pages/StoryCreator';
+import StoryPage from './pages/StoryPage';
 
 function App() {
   const serverURL = "http://localhost:5000/";
@@ -82,22 +84,41 @@ function App() {
     return true;
   }
 
+  const onCreateStory = async (story)=>{
+    const res=await fetch(`${serverURL}stories`,{
+      method:'post',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(story)
+    })
+    setStories([...stories,res.json()]);
+  } 
+
   useEffect(()=>{
-    const CharSet = async()=>{
+    const Init = async()=>{
       const chars = await fetchCharacters();
-      console.log(chars);
+      const stories = await fetchStories();
+      setStories(stories);
       setCharacters(chars);
     } 
 
-    CharSet();
+    Init();
   },[])
 
   const fetchCharacters = async()=>{
     const chars = await fetch(`${serverURL}characters`);
     const data = await chars.json();
-
+    
     return data;
   } 
+
+  const fetchStories = async()=>{
+    const stories = await fetch(`${serverURL}stories`);
+    const data = await stories.json();
+
+    return data;
+  }
 
   return (
     <Router className="App">
@@ -106,22 +127,31 @@ function App() {
         <Route path="/" exact element={<Main characters={characters} stories={stories}/>}/>
         <Route path="/signin" element={<SignIn onSignIn={onSignIn}/>}/>
         <Route path="/login" element={<Login onLogIn={onLogIn}/>}/>
-        <Route path="/character-creator" element={<CharacterCreator onCreate={onCreateCharacter} creator={user}/>}/>
+        <Route path="/character-creator" element={<CharacterCreator onCreate={onCreateCharacter} creator={user} otherChars={characters.filter(char=>char.creator===user)}/>}/>
+        <Route path="/story-creator" element={<StoryCreator onCreate={onCreateStory} creator={user} characters={characters.filter(char=>char.creator===user)}/>}/>
+        
         {characters.map(character=>
-          <>
-            <Route key={character.id} 
+          <React.Fragment key={character.id}>
+            <Route 
               path={`/character=${character.id}`} 
               element={<CharacterPage char={character}
                myCreation={user===character.creator}
                
               />}/>
-              <Route key={`${character.id}-edit`}
+              <Route
                 path={`character=${character.id}/editor`}
                 element={<CharacterEditor character={character} 
                 relatedChars={characters.filter(char=>char.creator===character.creator)}
                 creator={user}/>}/>
-            </>
+            </React.Fragment>
             )}
+
+        {stories.map(story=>
+          <React.Fragment key={story.id}>
+            <Route path={`story=${story.id}`} element={<StoryPage story={story} myStory={story.creator===user}/>}/>
+          </React.Fragment>
+        )}
+
         {users.map(thisUser=>
           <Route key={thisUser.id} 
             path={`/user=${thisUser.id}`} 
@@ -129,6 +159,8 @@ function App() {
             isLogged={thisUser.id===user} 
             characters={characters.filter(char=>char.creator===thisUser.id)} 
             stories={stories.filter(story=>story.creator===thisUser.id)}/>}/>)}
+      
+        
       </Routes>
     </Router>
   );

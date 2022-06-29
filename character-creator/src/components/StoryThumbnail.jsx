@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const StoryThumbnail = ({story}) => {
   
@@ -16,11 +17,13 @@ const StoryThumbnail = ({story}) => {
 
     return (
     <div className="Thumbnail-story">
-        <img src={story.picture}/>
+        <Link to={`/story=${story.id}`}>
+          <img src={story.picture}/>
         <div>
-            <h4>{story.name}</h4>
+            <h4>{story.title}</h4>
             <p>{creator}</p>
         </div>
+        </Link>
     </div>
   )
 }

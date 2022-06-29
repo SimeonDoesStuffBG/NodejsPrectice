@@ -19,6 +19,7 @@ const UserPage = ({user, isLogged, characters, stories}) => {
             <h4>Stories</h4>
             {isLogged && <Link to="/story-creator"><button>Create New Story</button></Link>}
             <StoryList stories={stories}/>
+            {stories.length===0 && <p>This user has no stories</p>}
         </div>
         </div>
     </div>

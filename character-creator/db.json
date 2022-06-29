@@ -121,10 +121,69 @@
       "createdOn": "2022-06-29T13:07:36.608Z",
       "upDatedOn": "2022-06-29T13:07:36.608Z",
       "id": 5
+    },
+    {
+      "name": "Simeon",
+      "creator": 6,
+      "gender": "IDFK",
+      "description": "What's up my beardos and weirdos",
+      "relationships": {
+        "Friends": [
+          {
+            "id": 1,
+            "name": "John"
+          }
+        ],
+        "Enemies": [
+          {
+            "id": 4,
+            "name": "Leo"
+          }
+        ],
+        "Family": [
+          {
+            "id": 3,
+            "name": "Duncan"
+          },
+          {
+            "id": 1,
+            "name": "John"
+          }
+        ],
+        "Lovers": [
+          {
+            "id": 5,
+            "name": "Dominic"
+          }
+        ]
+      },
+      "featuredIn": [],
+      "createdOn": "2022-06-29T20:23:28.751Z",
+      "upDatedOn": "2022-06-29T20:23:28.751Z",
+      "id": 6
     }
   ],
   "plotpoints": [],
-  "stories": [],
+  "stories": [
+    {
+      "title": "Not Dune",
+      "creator": 6,
+      "characters": [
+        {
+          "id": 4,
+          "name": "Leo"
+        },
+        {
+          "id": 1,
+          "name": "John"
+        }
+      ],
+      "plotpoints": [],
+      "createdOn": "2022-06-29T20:22:14.465Z",
+      "upDatedOn": "2022-06-29T20:22:14.465Z",
+      "id": 1
+    }
+  ],
   "posts": [
     {
       "id": 1,
