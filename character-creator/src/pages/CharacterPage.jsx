@@ -5,7 +5,7 @@ const CharacterPage = ({char}) => {
   return (
     <div>
       <h1>{char.name}</h1>
-      
+      <h4>Created by </h4>
     </div>
   )
 }

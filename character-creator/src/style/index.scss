@@ -27,7 +27,10 @@ $ThumbnailWidth:320px;
     }
 
     &-layout{
-      column-count: 2;
+      display:grid;
+      grid-template-columns:auto auto;
+      grid-column-gap:20px;
+      //column-rule: 3px double black;
     }
   }
 
