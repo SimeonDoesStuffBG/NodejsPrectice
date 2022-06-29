@@ -116,7 +116,7 @@ function App() {
        ]
       }
 
-    const res = await fetch(`${serverURL}characters`,{
+    const res = await fetch(`${serverURL}characters/${character.id}`,{
       method:'PUT',
       headers:{
         'Content-type':'application/json'
@@ -172,12 +172,12 @@ function App() {
                
               />}/>
               <Route
-                path={`character=${character.id}/editor`}
+                path={`/character=${character.id}/editor`}
                 element={<CharacterCreator
                 curChar={character}
                 onCreate={onEditCharacter}
                 otherChars={characters.filter(char=>char.creator===character.creator)}
-                creator={user}/>}/>
+                creator={character.creator}/>}/>
             </React.Fragment>
             )}
 

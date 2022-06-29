@@ -18,7 +18,7 @@ const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
 
             setFriends(curChar.relationships.Friends);
             setEnemies(curChar.relationships.Enemies);
-            setRelatives(curChar.relationships.Famuly);
+            setRelatives(curChar.relationships.Family);
             setLovers(curChar.relationships.Lovers);
         }
         },[]
