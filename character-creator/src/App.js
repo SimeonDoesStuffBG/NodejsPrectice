@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import UserPage from './pages/UserPage';
 import CharacterCreator from './pages/CharacterCreator';
 import CharacterPage from './pages/CharacterPage';
+import CharacterEditor from './pages/CharacterEditor';
 
 function App() {
   const serverURL = "http://localhost:5000/";
@@ -77,6 +78,7 @@ function App() {
       },
       body:JSON.stringify(char)
     })
+    setCharacters([...characters,res.json()]);
     return true;
   }
 
@@ -105,7 +107,21 @@ function App() {
         <Route path="/signin" element={<SignIn onSignIn={onSignIn}/>}/>
         <Route path="/login" element={<Login onLogIn={onLogIn}/>}/>
         <Route path="/character-creator" element={<CharacterCreator onCreate={onCreateCharacter} creator={user}/>}/>
-        {characters.map(character=><Route key={character.id} path={`/character=${character.id}`} element={<CharacterPage char={character}/>}/>)}
+        {characters.map(character=>
+          <>
+            <Route key={character.id} 
+              path={`/character=${character.id}`} 
+              element={<CharacterPage char={character}
+               myCreation={user===character.creator}
+               
+              />}/>
+              <Route key={`${character.id}-edit`}
+                path={`character=${character.id}/editor`}
+                element={<CharacterEditor character={character} 
+                relatedChars={characters.filter(char=>char.creator===character.creator)}
+                creator={user}/>}/>
+            </>
+            )}
         {users.map(thisUser=>
           <Route key={thisUser.id} 
             path={`/user=${thisUser.id}`} 

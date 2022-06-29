@@ -105,6 +105,22 @@
       "createdOn": "2022-06-27T10:20:28.953Z",
       "upDatedOn": "2022-06-27T10:20:28.953Z",
       "id": 4
+    },
+    {
+      "name": "Dominic",
+      "creator": 6,
+      "gender": "F",
+      "description": "A dude who likes stuff",
+      "relationships": {
+        "Friends": [],
+        "Enemies": [],
+        "Family": [],
+        "Lovers": []
+      },
+      "featuredIn": [],
+      "createdOn": "2022-06-29T13:07:36.608Z",
+      "upDatedOn": "2022-06-29T13:07:36.608Z",
+      "id": 5
     }
   ],
   "plotpoints": [],

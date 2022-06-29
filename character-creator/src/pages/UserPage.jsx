@@ -1,7 +1,6 @@
 import React, { useState} from 'react'
 import { Link } from 'react-router-dom';
 import CharacterList from '../components/CharacterList';
-import CharacterThumbnail from '../components/CharacterThumbnail';
 import StoryList from '../components/StoryList';
 
 const UserPage = ({user, isLogged, characters, stories}) => {
