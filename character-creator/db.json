@@ -73,6 +73,7 @@
       },
       "featuredIn": [
         {
+          "id": 1,
           "title": "Not Dune"
         }
       ],
@@ -107,7 +108,12 @@
         "Family": [],
         "Lovers": []
       },
-      "featuredIn": [],
+      "featuredIn": [
+        {
+          "id": 1,
+          "title": "Not Dune"
+        }
+      ],
       "createdOn": "2022-06-27T10:12:07.115Z",
       "updatedOn": "2022-06-27T10:12:07.115Z",
       "id": 3
@@ -123,11 +129,7 @@
         "Family": [],
         "Lovers": []
       },
-      "featuredIn": [
-        {
-          "title": "Not Dune"
-        }
-      ],
+      "featuredIn": [],
       "createdOn": "2022-06-27T10:20:28.953Z",
       "updatedOn": "2022-06-27T10:20:28.953Z",
       "id": 4
@@ -143,7 +145,12 @@
         "Family": [],
         "Lovers": []
       },
-      "featuredIn": [],
+      "featuredIn": [
+        {
+          "id": 1,
+          "title": "Not Dune"
+        }
+      ],
       "createdOn": "2022-06-29T13:07:36.608Z",
       "updatedOn": "2022-06-29T13:07:36.608Z",
       "id": 5
@@ -196,22 +203,22 @@
       "creator": 6,
       "characters": [
         {
-          "id": 4,
-          "name": "Leo"
-        },
-        {
           "id": 1,
           "name": "John Doe"
         },
         {
           "id": 3,
           "name": "Duncan"
+        },
+        {
+          "id": 5,
+          "name": "Dominic"
         }
       ],
       "plotpoints": [],
       "createdOn": "2022-06-29T20:22:14.465Z",
       "id": 1,
-      "updatedOn": "2022-06-30T21:18:00.811Z"
+      "updatedOn": "2022-06-30T21:35:56.933Z"
     },
     {
       "title": "Story",

@@ -118,9 +118,11 @@ function App() {
       body:JSON.stringify(upStory)
     });
 
-    updateCharacterInStory(story);
+    
 
     const data=await res.json();
+    updateCharacterInStory(data);
+
     setStories(stories.map(story=>story.id===id?{...story,
       title:data.title,
       characters:data.characters,
@@ -131,9 +133,10 @@ function App() {
   const updateCharacterInStory = (story)=>{
     story.characters.forEach(async(char)=>{
       const charToEdit = await fetchCharacter(char.id);
-      const featuredStories=charToEdit.featuredIn;
+      let featuredStories=charToEdit.featuredIn;
       featuredStories.push({id:story.id,title:story.title})
-      featuredStories.sort((a, b)=>a-b).filter((a,b)=>a.id!=b.id);
+      
+      featuredStories=featuredStories.sort((a, b)=>a-b).filter((a,b)=>{return b+1>=featuredStories.length||a.id!=featuredStories[b+1].id});
       
       const uppChar = {...charToEdit, 
         featuredIn:featuredStories}//.sort((a,b)=>{a.id-b.id}).filter((a,b)=>a.id!==b.id)}
