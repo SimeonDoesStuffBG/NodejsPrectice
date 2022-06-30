@@ -43,19 +43,37 @@
   ],
   "characters": [
     {
-      "name": "John",
+      "name": "John Doe",
       "creator": 6,
       "gender": "nb",
       "description": "Hi, I'm bob.",
       "relationships": {
-        "Friends": [],
+        "Friends": [
+          {
+            "id": 4,
+            "name": "Leo"
+          },
+          {
+            "id": 3,
+            "name": "Duncan"
+          }
+        ],
         "Enemies": [],
-        "Family": [],
+        "Family": [
+          {
+            "id": 3,
+            "name": "Duncan"
+          },
+          {
+            "id": 4,
+            "name": "Leo"
+          }
+        ],
         "Lovers": []
       },
       "featuredIn": [],
       "createdOn": "2022-06-23T20:38:24.298Z",
-      "upDatedOn": "2022-06-23T20:38:24.298Z",
+      "updatedOn": "2022-06-30T17:16:38.153Z",
       "id": 1
     },
     {
@@ -71,7 +89,7 @@
       },
       "featuredIn": [],
       "createdOn": "2022-06-23T20:59:30.045Z",
-      "upDatedOn": "2022-06-23T20:59:30.045Z",
+      "updatedOn": "2022-06-23T20:59:30.045Z",
       "id": 2
     },
     {
@@ -87,7 +105,7 @@
       },
       "featuredIn": [],
       "createdOn": "2022-06-27T10:12:07.115Z",
-      "upDatedOn": "2022-06-27T10:12:07.115Z",
+      "updatedOn": "2022-06-27T10:12:07.115Z",
       "id": 3
     },
     {
@@ -103,7 +121,7 @@
       },
       "featuredIn": [],
       "createdOn": "2022-06-27T10:20:28.953Z",
-      "upDatedOn": "2022-06-27T10:20:28.953Z",
+      "updatedOn": "2022-06-27T10:20:28.953Z",
       "id": 4
     },
     {
@@ -119,7 +137,7 @@
       },
       "featuredIn": [],
       "createdOn": "2022-06-29T13:07:36.608Z",
-      "upDatedOn": "2022-06-29T13:07:36.608Z",
+      "updatedOn": "2022-06-29T13:07:36.608Z",
       "id": 5
     },
     {
@@ -159,7 +177,7 @@
       },
       "featuredIn": [],
       "createdOn": "2022-06-29T20:23:28.751Z",
-      "upDatedOn": "2022-06-29T20:23:28.751Z",
+      "updatedOn": "2022-06-29T20:23:28.751Z",
       "id": 6
     }
   ],

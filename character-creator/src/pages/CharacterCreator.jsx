@@ -7,10 +7,11 @@ const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
     const nav = useNavigate();
 
     useEffect(()=>{    
-        console.log(otherChars)
+        console.log(otherChars);   
         if(creator===-1){//if a user is not logged in we get redirected back to the main page
         nav("/");
         }
+
         if(curChar!==null){
             setName(curChar.name);
             setGender(curChar.gender);
@@ -23,6 +24,7 @@ const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
         }
         },[]
     )
+
     const [name, setName] = useState('');
     const [gender, setGender]=useState('');
     const [description, setDescription]=useState('');
@@ -43,8 +45,7 @@ const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
 
         const CreatedOn = new Date();
         const UpdatedOn = CreatedOn;
-       
-
+        console.log(UpdatedOn)
         onCreate({name:name, 
             creator:creator, 
             gender:gender, 
@@ -57,7 +58,7 @@ const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
             },
             featuredIn:[],
             createdOn:CreatedOn,
-            upDatedOn:UpdatedOn});
+            updatedOn:UpdatedOn},curChar!==null?curChar.id:-1);
         setName('');
         setGender('');
         setDescription('');

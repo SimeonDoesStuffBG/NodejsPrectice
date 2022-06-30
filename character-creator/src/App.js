@@ -35,7 +35,7 @@ function App() {
   }
 
   const fetchCharacter = async(id)=>{
-    const res = await fetch(`${serverURL}charactes/${id}`);
+    const res = await fetch(`${serverURL}characters/${id}`);
     const data = await res.json();
 
     return data;
@@ -78,7 +78,7 @@ function App() {
     return true;
   }
 
-  const onCreateCharacter=async (char)=>{
+  const onCreateCharacter=async (char,filler)=>{
     const res=await fetch(`${serverURL}characters`,{
       method:'POST',
       headers:{ 
@@ -101,31 +101,50 @@ function App() {
     setStories([...stories,res.json()]);
   } 
 
-  const onEditCharacter = async (character)=>{
-    const charToUpdate = await fetchCharacter(character.id);
+  const onEditCharacter = async (character, id)=>{
+    const charToUpdate = await fetchCharacter(id);
+    console.log(charToUpdate);
     const upChar = {...charToUpdate,
        name:character.name, 
        gender:character.gender,
        description:character.description,
 
-       relationships:[
-        character.relationships.Friends,
-        character.relationships.Enemies,
-        character.relationships.Family,
-        character.relationships.Lovers 
-       ]
+       relationships:{
+        Friends:character.relationships.Friends,
+        Enemies:character.relationships.Enemies,
+        Family:character.relationships.Family,
+        Lovers:character.relationships.Lovers 
+          },
+      featuredIn:character.featuredIn,
+      updatedOn:character.updatedOn 
       }
 
-    const res = await fetch(`${serverURL}characters/${character.id}`,{
+      console.log(upChar);
+    const res = await fetch(`${serverURL}characters/${id}`,{
       method:'PUT',
       headers:{
         'Content-type':'application/json'
       },
       body:JSON.stringify(upChar)
     })
+
     const data = await res.json();
 
+    setCharacters(characters.map(char=>
+      character.id===char.id?{...char,
+        name:data.name, 
+        gender:data.gender,
+        description:data.description,
  
+        relationships:{
+         Friends:data.relationships.Friends,
+         Enemies:data.relationships.Enemies,
+         Family:data.relationships.Family,
+         Lovers:data.relationships.Lovers 
+  },
+  featuredIn:data.featuredIn,
+  updatedOn:data.updatedOn
+}:char))
   }
 
   useEffect(()=>{
@@ -153,6 +172,12 @@ function App() {
     return data;
   }
 
+  const fetchStory = async(id)=>{
+    const story = await fetch(`${serverURL}stories/${id}`);
+    const data = await story.json();
+
+    return data;
+  }
   return (
     <Router className="App">
       <Nav loggedUser={user}/>
@@ -176,7 +201,7 @@ function App() {
                 element={<CharacterCreator
                 curChar={character}
                 onCreate={onEditCharacter}
-                otherChars={characters.filter(char=>char.creator===character.creator)}
+                otherChars={characters.filter(char=>(char.creator===character.creator && char.id!==character.id))}
                 creator={character.creator}/>}/>
             </React.Fragment>
             )}
