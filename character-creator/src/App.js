@@ -90,7 +90,7 @@ function App() {
     return true;
   }
 
-  const onCreateStory = async (story)=>{
+  const onCreateStory = async (story, id)=>{
     const res=await fetch(`${serverURL}stories`,{
       method:'post',
       headers:{
@@ -98,12 +98,60 @@ function App() {
       },
       body:JSON.stringify(story)
     })
+    updateCharacterInStory(res.json());
     setStories([...stories,res.json()]);
   } 
 
+  const onEditStory = async(story, id)=>{
+    const storyToUpdate = await fetchStory(id);
+    const upStory = {...storyToUpdate, 
+      title:story.title,
+      characters:story.characters,
+      updatedOn:story.updatedOn
+    }
+
+    const res = await fetch(`${serverURL}stories/${id}`,{
+      method:'PUT',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(upStory)
+    });
+
+    updateCharacterInStory(story);
+
+    const data=await res.json();
+    setStories(stories.map(story=>story.id===id?{...story,
+      title:data.title,
+      characters:data.characters,
+      updatedOn:data.updatedOn
+    }:story))
+  };
+
+  const updateCharacterInStory = (story)=>{
+    story.characters.forEach(async(char)=>{
+      const charToEdit = await fetchCharacter(char.id);
+      const featuredStories=charToEdit.featuredIn;
+      featuredStories.push({id:story.id,title:story.title})
+      featuredStories.sort((a, b)=>a-b).filter((a,b)=>a.id!=b.id);
+      
+      const uppChar = {...charToEdit, 
+        featuredIn:featuredStories}//.sort((a,b)=>{a.id-b.id}).filter((a,b)=>a.id!==b.id)}
+
+      const res = await fetch(`${serverURL}characters/${char.id}`, {
+        method:'PUT',
+        headers:{
+          "Content-type":"application/json",
+        },
+        body:JSON.stringify(uppChar)
+      })
+      const data = await res.json();
+      setCharacters(characters.map(charac=>charac.id===char.id?{...charac,featuredIn:data.featuredIn}:charac))
+    })
+  }
+
   const onEditCharacter = async (character, id)=>{
     const charToUpdate = await fetchCharacter(id);
-    console.log(charToUpdate);
     const upChar = {...charToUpdate,
        name:character.name, 
        gender:character.gender,
@@ -208,7 +256,8 @@ function App() {
 
         {stories.map(story=>
           <React.Fragment key={story.id}>
-            <Route path={`story=${story.id}`} element={<StoryPage story={story} myStory={story.creator===user}/>}/>
+            <Route path={`/story=${story.id}`} element={<StoryPage story={story} myStory={story.creator===user}/>}/>
+            <Route path={`/story=${story.id}/editor`} element={<StoryCreator curStory={story} onCreate={onEditStory} creator={user} characters={characters.filter(char=>char.creator===story.creator)}/>}/>
           </React.Fragment>
         )}
 

@@ -149,7 +149,7 @@ const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
             </tr>
         </tbody>
         </table>}
-        <input type="submit" value="Create Character"/>
+        <input type="submit" value={curChar===null?"Create Character":"Save Changes to Character"}/>
     </form>
     </div>
   )

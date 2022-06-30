@@ -10,8 +10,13 @@ const StoryCreator = ({curStory,onCreate, creator, characters}) => {
     const [includedChars, setIncludedChars]=useState([]);
 
     useEffect(()=>{
+        
         if(creator===-1)
             nav('/');
+        if(curStory!==null){
+            setTitle(curStory.title);
+            setIncludedChars(curStory.characters);
+        }
     },[])
 
     const onCreateStory=(e)=>{
@@ -30,13 +35,15 @@ const StoryCreator = ({curStory,onCreate, creator, characters}) => {
             characters:includedChars,
             plotpoints:[],
             createdOn:CreatedOn,
-            upDatedOn:UpdatedOn,
-        });
+            updatedOn:UpdatedOn,
+        },curStory!==null?curStory.id:-1);
         setTitle('');
         setIncludedChars([]);
         nav(`/user=${creator}`);
     }
   return (
+    <div>
+    <h1>Story {curStory===null?"creator":"editor"}</h1>
     <form onSubmit={onCreateStory}>
         <table><tbody>
             <MyInput name="Title" value={title} onValueChange={e=>setTitle(e.target.value)}/>
@@ -59,8 +66,9 @@ const StoryCreator = ({curStory,onCreate, creator, characters}) => {
                 </td>
             </tr>
         </tbody></table>
-        <input type="submit" value="Create new Story"/>
+        <input type="submit" value={curStory===null?"Create new Story":"Save Changes to story"}/>
     </form>
+    </div>
   )
   }
 
