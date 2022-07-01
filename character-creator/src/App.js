@@ -16,20 +16,18 @@ function App() {
   const serverURL = "http://localhost:5000/";
 
   const [users, setUsers]= useState([]);
+  const [changedUsers,setChangedUsers]=useState([]);
   const [user,setUser] = useState(-1);
+
   const [characters,setCharacters]=useState([]);
+  const [changedChars,setChangedChars]=useState([]);
+
   const [stories, setStories]=useState([]);
+  const [changedStories,setChangedStories]=useState([]);
+
   const [plotpoints, setPlotpoints]=useState([]);
+  const [changedPlots,setChangedPlots]=useState([]);
   //const nav =useNavigate();
-
-  useEffect(() => {
-    const getUsers = async()=>{
-      const usersFromServer = await fetchUsers();
-      setUsers(usersFromServer);
-    }
-
-    getUsers();
-  },[]);
 
   const fetchUsers = async()=>{
     const res = await fetch(`${serverURL}users`);
@@ -501,6 +499,9 @@ const onPlotpointDelete = async (id,story)=>{
       const chars = await fetchCharacters();
       const stories = await fetchStories();
       const plotpoints = await fetchPlotpoints();
+      const users = await fetchUsers();
+      
+      setUsers(users);
       setStories(stories);
       setCharacters(chars);
       setPlotpoints(plotpoints);
