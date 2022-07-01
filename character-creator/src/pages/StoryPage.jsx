@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 
 const StoryPage = ({story, myStory}) => {
 
-  const [creatorName,setCreatorName]=useState('');
+  const [creatorName,setCreatorName]=useState('[deleted]');
   //const [possibleChars,setPossibleChars]=useState([]);
   useEffect(()=>{
     const getCreator = async()=>{
-      const res = await fetch(`http://localhost:5000/users/${story.creator}`);
-      const creator = await res.json();
-      setCreatorName(creator.username);
-      
+      if(story.creator!==-1){
+        const res = await fetch(`http://localhost:5000/users/${story.creator}`);
+        const creator = await res.json();
+        setCreatorName(creator.username);
+      }
       //const chars=await fetch(`http://localhost:5000/characters/${story.creator}`);
       //const charList = await chars.json();
       //setPossibleChars(charList.filter(char=>char.featuredIn.every(stor=>stor.id!==story.id)));
@@ -22,7 +23,7 @@ const StoryPage = ({story, myStory}) => {
   return (
     <div>
       <h1>{story.title}</h1>
-      <p>created by <Link to={`/user=${story.creator}`}>{creatorName}</Link></p>
+      <p>created by {story.creator!==-1?<Link to={`/user=${story.creator}`}>{creatorName}</Link>:creatorName}</p>
      {myStory&&<Link to={`editor`}><button>Edit Story</button></Link>}
      
      <div className="list-layout">
@@ -34,11 +35,11 @@ const StoryPage = ({story, myStory}) => {
         <div>
           <h4>Plotpoints:</h4>
           {myStory && <Link to={'plotpoint-creator'}><button>Add Plotpoint</button></Link>}
-          <ul>
+          <ol>
             {story.plotpoints.map(plot=>
-              <li key={plot.id} className="characterThing"><Link to={`/plotpoint=${plot.id}`}>{plot.title}</Link></li>
+              <li key={plot.id}><Link to={`/plotpoint=${plot.id}`}>{plot.timeIndex + ' ' + plot.title}</Link></li>
             )}
-          </ul>
+          </ol>
         </div>
      </div>
      </div>

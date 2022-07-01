@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {PropTypes} from 'prop-types'
 
-const Nav = ({loggedUser}) => {
+const Nav = ({loggedUser, LogOff}) => {
     const [user,setUser] =useState({});
 
     useEffect(()=>{
@@ -25,7 +25,10 @@ const Nav = ({loggedUser}) => {
             {loggedUser===-1 ? <div className="userEnter">
             <Link to="/signin">Sign in</Link>
             |<Link to="/login">Log in</Link>
-            </div> : <Link to={`/user=${loggedUser}`}><p>{user.username}</p></Link>}
+            </div> : <div>
+                <Link to={`/user=${loggedUser}`}><p>{user.username}</p></Link>
+                <button onClick={LogOff}>Log Off</button>
+            </div>}
         </div>
     </div>
   )

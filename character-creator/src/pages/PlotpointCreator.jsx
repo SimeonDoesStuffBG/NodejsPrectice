@@ -12,6 +12,7 @@ const PlotpointCreator = ({curPlotpoint, story, onCreate, characters, creator}) 
   const [timeIndex, setTimeIndex] = useState(1);
 
   useEffect(()=>{
+    
     if(creator===-1 || creator!==story.creator){
       nav(`/story=${story.id}`);
     }
@@ -36,7 +37,7 @@ const PlotpointCreator = ({curPlotpoint, story, onCreate, characters, creator}) 
       title:title,
       creator:creator,
       story:story.id,
-      timeIndex:timeIndex,
+      timeIndex:parseInt(timeIndex),
       description:description,
       characters:includedChars,
       createdOn:createdOn,

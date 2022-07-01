@@ -17,14 +17,6 @@
       "id": 2
     },
     {
-      "username": "fffd",
-      "email": "leothebackgroundsheep@gmail.com",
-      "password": "asd",
-      "dateOfReg": "Tue Jun 21 2022 13:56:41 GMT+0300 (Eastern European Summer Time)",
-      "dateOfLast": "Tue Jun 21 2022 13:56:41 GMT+0300 (Eastern European Summer Time)",
-      "id": 3
-    },
-    {
       "username": "sgmilev",
       "email": "simeongmilev432@gmail.com",
       "password": "ert",
@@ -83,7 +75,7 @@
     },
     {
       "name": "Paul",
-      "creator": 3,
+      "creator": -1,
       "gender": "",
       "description": "Somebody Once Told me\nThe World is gonna roll me",
       "relationships": {
@@ -95,7 +87,8 @@
       "featuredIn": [],
       "createdOn": "2022-06-23T20:59:30.045Z",
       "updatedOn": "2022-06-23T20:59:30.045Z",
-      "id": 2
+      "id": 2,
+      "upDatedOn": "2022-07-01T11:22:28.948Z"
     },
     {
       "name": "Duncan",
@@ -129,7 +122,12 @@
         "Family": [],
         "Lovers": []
       },
-      "featuredIn": [],
+      "featuredIn": [
+        {
+          "id": 1,
+          "title": "Not Dune"
+        }
+      ],
       "createdOn": "2022-06-27T10:20:28.953Z",
       "updatedOn": "2022-06-27T10:20:28.953Z",
       "id": 4
@@ -190,7 +188,12 @@
           }
         ]
       },
-      "featuredIn": [],
+      "featuredIn": [
+        {
+          "id": 1,
+          "title": "Not Dune"
+        }
+      ],
       "createdOn": "2022-06-29T20:23:28.751Z",
       "updatedOn": "2022-06-29T20:23:28.751Z",
       "id": 6
@@ -201,8 +204,8 @@
       "title": "PPPd",
       "creator": 6,
       "story": 1,
-      "timeIndex": 1,
-      "description": "aassd",
+      "timeIndex": 3,
+      "description": "aassdFFddh",
       "characters": [
         {
           "id": 3,
@@ -218,7 +221,7 @@
         }
       ],
       "createdOn": "2022-07-01T07:41:05.537Z",
-      "updatedOn": "2022-07-01T07:41:05.537Z",
+      "updatedOn": "2022-07-01T12:14:50.685Z",
       "id": 1
     },
     {
@@ -258,23 +261,27 @@
         }
       ],
       "createdOn": "2022-07-01T07:42:58.628Z",
-      "updatedOn": "2022-07-01T07:42:58.628Z",
+      "updatedOn": "2022-07-01T12:15:35.930Z",
       "id": 3
     },
     {
       "title": "Plothole",
       "creator": 6,
       "story": 1,
-      "timeIndex": 1,
+      "timeIndex": 4,
       "description": "",
       "characters": [
         {
           "id": 1,
           "name": "John Doe"
+        },
+        {
+          "id": 3,
+          "name": "Duncan"
         }
       ],
       "createdOn": "2022-07-01T07:44:16.096Z",
-      "updatedOn": "2022-07-01T07:44:16.096Z",
+      "updatedOn": "2022-07-01T12:15:06.094Z",
       "id": 4
     }
   ],
@@ -306,11 +313,6 @@
       ],
       "plotpoints": [
         {
-          "id": 1,
-          "title": "PPPd",
-          "timeIndex": 1
-        },
-        {
           "id": 2,
           "title": "1233",
           "timeIndex": 1
@@ -321,14 +323,19 @@
           "timeIndex": 1
         },
         {
+          "id": 1,
+          "title": "PPPd",
+          "timeIndex": 3
+        },
+        {
           "id": 4,
           "title": "Plothole",
-          "timeIndex": 1
+          "timeIndex": 4
         }
       ],
       "createdOn": "2022-06-29T20:22:14.465Z",
       "id": 1,
-      "updatedOn": "2022-07-01T07:44:16.580Z"
+      "updatedOn": "2022-07-01T12:15:36.403Z"
     },
     {
       "title": "Story",

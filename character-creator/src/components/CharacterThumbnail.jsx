@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom'
 
 const CharacterThumbnail = ({character}) => {
   
-  const [creator,setCreator]=useState('');
+  const [creator,setCreator]=useState('[deleted]');
 
   useEffect(()=>{
     const getCreator = async()=>{
-      const theCreator = await fetch(`http://localhost:5000/users/${character.creator}`);
-      const data =await theCreator.json();
-      setCreator(data.username);
+      if(character.creator!==-1){
+        const theCreator = await fetch(`http://localhost:5000/users/${character.creator}`);
+        const data =await theCreator.json();
+        setCreator(data.username);
+      }
     }
     getCreator();
   },[]

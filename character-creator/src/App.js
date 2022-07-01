@@ -62,6 +62,10 @@ function App() {
     return true;
   }
 
+  const onLogOff = ()=> {
+    setUser(-1);
+  }
+
   const onSignIn = async (user)=>{
     if(await userExists(user.username, user.email)!=undefined){
       alert("User already exists");
@@ -150,12 +154,11 @@ function App() {
   const updateStoryPlotpoint = async plotpoint=>{
     
     const storyToFix=await fetchStory(plotpoint.story);
-    const storyPlotpoints = storyToFix.plotpoints;
+    const storyPlotpoints = storyToFix.plotpoints.filter(plot=>plot.id!==plotpoint.id);
     
-    if(storyToFix.plotpoints.every(plot=>plot.id!==plotpoint.id)){
-     storyPlotpoints.push({id:plotpoint.id, title:plotpoint.title, timeIndex:plotpoint.timeIndex});
-     storyPlotpoints.sort((a,b)=>a.id-b.id);
-    }
+    storyPlotpoints.push({id:plotpoint.id, title:plotpoint.title, timeIndex:plotpoint.timeIndex});
+
+    storyPlotpoints.sort((a,b)=>a.timeIndex-b.timeIndex);
     const charsToAdd=plotpoint.characters.filter(char=>storyToFix.characters.every(ch=>ch.id!==char.id));
     
     const fixxedStory={...storyToFix,
@@ -292,6 +295,91 @@ const onEditPlotpoint = async(plotpoint,id)=>{
   }:plot))
 }
 
+const onUserDeleteComplete = async(id)=>{
+  onLogOff();
+  stories.filter(story=>story.creator===id).forEach(async story=>{
+    await fetch(`${serverURL}stories/${story.id}`,{
+      method:'DELETE'
+    })
+
+    setStories(stories.filter(stor=>stor.id!==story.id));
+  });
+
+  characters.filter(char=>char.creator===id).forEach(async char=> {
+    await fetch(`${serverURL}characters/${char.id}`,{ 
+      method:'DELETE'
+    })
+
+    setCharacters(characters.filter(ch=>ch.id!==char.id));
+  })
+
+  plotpoints.filter(plotpoint=>plotpoint.creator===id).forEach(async plotpoint=>{
+    await fetch(`${serverURL}plotpoints/${plotpoint.id}`,{
+      method:'DELETE'
+    })
+
+    setPlotpoints(plotpoints.filter(plot=>plot.id!==plotpoint.id));
+  })
+
+  await fetch(`${serverURL}users/${id}`, {
+    method:'DELETE'
+  })
+
+  setUsers(users.filter(user=>user.id!==id));
+  
+}
+
+const onUserDeleteAccOnly = async(id)=>{
+  onLogOff();
+  stories.filter(story=>story.creator===id).forEach(async story=>{
+    const editedStory = {...story, creator:-1, upDatedOn:new Date()}
+    const res = await fetch(`${serverURL}stories/${story.id}`,{
+      method:'PUT',
+      headers:{
+        "Content-type":"application/json"
+      },
+      body:JSON.stringify(editedStory)
+    })
+    const data = await res.json();
+
+    setStories(stories.map(stor=>stor.id===data.id?{...stor,creator:data.creator,updatedOn:data.updatedOn}:stor));
+  });
+
+  characters.filter(char=>char.creator===id).forEach(async char=> {
+    const editedChar = {...char, creator:-1, upDatedOn:new Date()}
+    const res = await fetch(`${serverURL}characters/${char.id}`,{
+      method:'PUT',
+      headers:{
+        "Content-type":"application/json"
+      },
+      body:JSON.stringify(editedChar)
+    })
+    const data =await res.json();
+
+    setCharacters(characters.map(ch=>ch.id===data.id?{...ch,creator:data.creator,updatedOn:data.updatedOn}:ch));
+  })
+
+  plotpoints.filter(plotpoint=>plotpoint.creator===id).forEach(async plotpoint=>{
+    const editedPlot = {...plotpoint, creator:-1, upDatedOn:new Date()}
+    const res = await fetch(`${serverURL}plotpoints/${plotpoint.id}`,{
+      method:'PUT',
+      headers:{
+        "Content-type":"application/json"
+      },
+      body:JSON.stringify(editedPlot)
+    })
+    const data =await res.json();
+
+    setPlotpoints(plotpoints.map(plot=>plot.id===data.id?{...plot,creator:data.creator,updatedOn:data.updatedOn}:plot));
+  })
+
+  fetch(`${serverURL}users/${id}`, {
+    method:'DELETE'
+  })
+
+  setUsers(users.filter(user=>user.id!==id));
+}
+
   useEffect(()=>{
     const Init = async()=>{
       const chars = await fetchCharacters();
@@ -341,7 +429,7 @@ const onEditPlotpoint = async(plotpoint,id)=>{
   }
   return (
     <Router className="App">
-      <Nav loggedUser={user}/>
+      <Nav loggedUser={user} LogOff={onLogOff}/>
       <Routes>
         <Route path="/" exact element={<Main characters={characters} stories={stories}/>}/>
         <Route path="/signin" element={<SignIn onSignIn={onSignIn}/>}/>
@@ -354,8 +442,7 @@ const onEditPlotpoint = async(plotpoint,id)=>{
             <Route 
               path={`/character=${character.id}`} 
               element={<CharacterPage char={character}
-               myCreation={user===character.creator}
-               
+              myCreation={character.creator!==-1&&user===character.creator} 
               />}/>
               <Route
                 path={`/character=${character.id}/editor`}
@@ -369,7 +456,7 @@ const onEditPlotpoint = async(plotpoint,id)=>{
 
         {stories.map(story=>
           <React.Fragment key={story.id}>
-            <Route path={`/story=${story.id}`} element={<StoryPage story={story} myStory={story.creator===user}/>}/>
+            <Route path={`/story=${story.id}`} element={<StoryPage story={story} myStory={story.creator!==-1&&story.creator===user}/>}/>
             <Route path={`/story=${story.id}/editor`} element={<StoryCreator curStory={story} onCreate={onEditStory} creator={user} characters={characters.filter(char=>char.creator===story.creator)}/>}/>
             <Route path={`/story=${story.id}/plotpoint-creator`} element={<PlotpointCreator onCreate={onCreatePlotpoint} story={story} characters={characters.filter(char=>char.creator===story.creator)} creator={user}/>}/>
            
@@ -378,8 +465,8 @@ const onEditPlotpoint = async(plotpoint,id)=>{
 
         {plotpoints.map(plot=>
               <React.Fragment key={plot.id}>
-                <Route path={`/plotpoint=${plot.id}`} element={<PlotpointPage plotpoint={plot}/>}/>
-                <Route path={`/plotpoint=${plot.id}/editor`} element={<PlotpointCreator curPlotpoint={plot} onCreate={onEditPlotpoint} characters={characters.filter(char=>char.creator===plot.creator)} creator={user}/>}/>
+                <Route path={`/plotpoint=${plot.id}`} element={<PlotpointPage plotpoint={plot} myPlotpoint={plot.creator!==-1&&plot.creator===user}/>}/>
+                <Route path={`/plotpoint=${plot.id}/editor`} element={<PlotpointCreator curPlotpoint={plot} story={stories.filter(story=>story.id===plot.story)[0]} onCreate={onEditPlotpoint} characters={characters.filter(char=>char.creator===plot.creator)} creator={user}/>}/>
               </React.Fragment>  
         )}
 
@@ -389,7 +476,9 @@ const onEditPlotpoint = async(plotpoint,id)=>{
             element={<UserPage user={thisUser} 
             isLogged={thisUser.id===user} 
             characters={characters.filter(char=>char.creator===thisUser.id)} 
-            stories={stories.filter(story=>story.creator===thisUser.id)}/>}/>)}
+            stories={stories.filter(story=>story.creator===thisUser.id)}
+            completeDel={onUserDeleteComplete}
+            accDelOnly={onUserDeleteAccOnly}/>}/>)}
       
         
       </Routes>
