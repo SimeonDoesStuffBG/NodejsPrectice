@@ -6,8 +6,7 @@ import MyInput from '../components/MyInput';
 const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
     const nav = useNavigate();
 
-    useEffect(()=>{    
-        console.log(otherChars);   
+    useEffect(()=>{     
         if(creator===-1){//if a user is not logged in we get redirected back to the main page
         nav("/");
         }
@@ -45,7 +44,6 @@ const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
 
         const CreatedOn = new Date();
         const UpdatedOn = CreatedOn;
-        console.log(UpdatedOn)
         onCreate({name:name, 
             creator:creator, 
             gender:gender, 

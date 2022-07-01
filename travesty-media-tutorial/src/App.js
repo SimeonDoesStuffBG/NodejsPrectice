@@ -48,7 +48,6 @@ function App() {
       },
       body:JSON.stringify(task)
     });
-    console.log(res);
     const newTask =await res.json();
     setTasks([...tasks, newTask]);
   }

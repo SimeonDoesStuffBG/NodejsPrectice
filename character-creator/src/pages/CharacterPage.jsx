@@ -1,10 +1,10 @@
 import React, { useEffect,useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
-const CharacterPage = ({char, myCreation}) => {
+const CharacterPage = ({char, myCreation, onDelete}) => {
   const [creatorName,setCreatorName]=useState('[deleted]');
-
+  const nav=useNavigate();
   useEffect(()=>{
     const getCreator = async()=>{
       if(char.creator!==-1){
@@ -27,7 +27,10 @@ const CharacterPage = ({char, myCreation}) => {
         <h4>Created by {char.creator!==-1?<Link to={`/user=${char.creator}`}>{creatorName}</Link>:creatorName}</h4>
       </section>
       <section className="Main">
-        {myCreation&&<Link to={`editor`}><button>Edit Character</button></Link>}
+        {myCreation&&<>
+        <Link to={`editor`}><button>Edit Character</button></Link>
+        <button title="Delete this character and remove them from all related plotpoints" onClick={()=>{onDelete(char.id,char.creator); nav( `/user=${char.creator}`)}}>Delete Character</button>
+        </>}
         <div>{char.description}</div>
         <div className="Relationships">
         </div>

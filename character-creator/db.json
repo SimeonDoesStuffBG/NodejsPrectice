@@ -70,7 +70,7 @@
         }
       ],
       "createdOn": "2022-06-23T20:38:24.298Z",
-      "updatedOn": "2022-07-01T13:59:46.973Z",
+      "updatedOn": "2022-07-01T15:08:51.663Z",
       "id": 1
     },
     {
@@ -105,10 +105,18 @@
         {
           "id": 1,
           "title": "Not Dune"
+        },
+        {
+          "id": 2,
+          "title": "jjh"
+        },
+        {
+          "id": 3,
+          "title": "k;lg;dskg;s"
         }
       ],
       "createdOn": "2022-06-27T10:12:07.115Z",
-      "updatedOn": "2022-07-01T13:59:46.976Z",
+      "updatedOn": "2022-07-01T15:08:51.671Z",
       "id": 3
     },
     {
@@ -126,10 +134,14 @@
         {
           "id": 1,
           "title": "Not Dune"
+        },
+        {
+          "id": 3,
+          "title": "k;lg;dskg;s"
         }
       ],
       "createdOn": "2022-06-27T10:20:28.953Z",
-      "updatedOn": "2022-07-01T13:59:46.981Z",
+      "updatedOn": "2022-07-01T15:08:51.675Z",
       "id": 4
     },
     {
@@ -147,10 +159,18 @@
         {
           "id": 1,
           "title": "Not Dune"
+        },
+        {
+          "id": 2,
+          "title": "jjh"
+        },
+        {
+          "id": 3,
+          "title": "k;lg;dskg;s"
         }
       ],
       "createdOn": "2022-06-29T13:07:36.608Z",
-      "updatedOn": "2022-07-01T13:59:46.987Z",
+      "updatedOn": "2022-07-01T15:08:51.676Z",
       "id": 5
     },
     {
@@ -195,7 +215,7 @@
         }
       ],
       "createdOn": "2022-06-29T20:23:28.751Z",
-      "updatedOn": "2022-07-01T13:59:46.990Z",
+      "updatedOn": "2022-07-01T15:08:51.685Z",
       "id": 6
     }
   ],
@@ -206,22 +226,9 @@
       "story": 1,
       "timeIndex": 3,
       "description": "aassdFFddh",
-      "characters": [
-        {
-          "id": 3,
-          "name": "Duncan"
-        },
-        {
-          "id": 4,
-          "name": "Leo"
-        },
-        {
-          "id": 6,
-          "name": "Simeon"
-        }
-      ],
+      "characters": [],
       "createdOn": "2022-07-01T07:41:05.537Z",
-      "updatedOn": "2022-07-01T12:14:50.685Z",
+      "updatedOn": "2022-07-01T15:09:07.220Z",
       "id": 1
     },
     {
@@ -230,14 +237,9 @@
       "story": 1,
       "timeIndex": 1,
       "description": "dddds",
-      "characters": [
-        {
-          "id": 5,
-          "name": "Dominic"
-        }
-      ],
+      "characters": [],
       "createdOn": "2022-07-01T07:41:49.639Z",
-      "updatedOn": "2022-07-01T07:41:49.639Z",
+      "updatedOn": "2022-07-01T15:09:07.221Z",
       "id": 2
     },
     {
@@ -246,22 +248,9 @@
       "story": 1,
       "timeIndex": 1,
       "description": "",
-      "characters": [
-        {
-          "id": 1,
-          "name": "John Doe"
-        },
-        {
-          "id": 4,
-          "name": "Leo"
-        },
-        {
-          "id": 6,
-          "name": "Simeon"
-        }
-      ],
+      "characters": [],
       "createdOn": "2022-07-01T07:42:58.628Z",
-      "updatedOn": "2022-07-01T12:15:35.930Z",
+      "updatedOn": "2022-07-01T15:09:07.224Z",
       "id": 3
     },
     {
@@ -270,18 +259,9 @@
       "story": 1,
       "timeIndex": 4,
       "description": "",
-      "characters": [
-        {
-          "id": 1,
-          "name": "John Doe"
-        },
-        {
-          "id": 3,
-          "name": "Duncan"
-        }
-      ],
+      "characters": [],
       "createdOn": "2022-07-01T07:44:16.096Z",
-      "updatedOn": "2022-07-01T12:15:06.094Z",
+      "updatedOn": "2022-07-01T15:09:07.228Z",
       "id": 4
     }
   ],
@@ -335,7 +315,55 @@
       ],
       "createdOn": "2022-06-29T20:22:14.465Z",
       "id": 1,
-      "updatedOn": "2022-07-01T13:58:31.340Z"
+      "updatedOn": "2022-07-01T15:09:07.230Z"
+    },
+    {
+      "title": "jjh",
+      "creator": 6,
+      "characters": [
+        {
+          "id": 3,
+          "name": "Duncan"
+        },
+        {
+          "id": 5,
+          "name": "Dominic"
+        },
+        {
+          "id": 7,
+          "name": "xxxcc"
+        }
+      ],
+      "plotpoints": [],
+      "createdOn": "2022-07-01T15:11:09.210Z",
+      "updatedOn": "2022-07-01T15:11:09.210Z",
+      "id": 2
+    },
+    {
+      "title": "k;lg;dskg;s",
+      "creator": 6,
+      "characters": [
+        {
+          "id": 3,
+          "name": "Duncan"
+        },
+        {
+          "id": 4,
+          "name": "Leo"
+        },
+        {
+          "id": 5,
+          "name": "Dominic"
+        },
+        {
+          "id": 6,
+          "name": "Simeon"
+        }
+      ],
+      "plotpoints": [],
+      "createdOn": "2022-07-01T15:11:35.708Z",
+      "updatedOn": "2022-07-01T15:11:35.708Z",
+      "id": 3
     }
   ]
 }

@@ -49,7 +49,6 @@ function App() {
     let users = await fetchUsers();
     let data=users.filter(user=>user.username===username||user.email===email);
 
-    //console.log(data[0]);
     return data[0];
   }
 
@@ -94,6 +93,7 @@ function App() {
       },
       body:JSON.stringify(char)
     })
+    
     setCharacters([...characters,res.json()]);
     return true;
   }
@@ -177,7 +177,7 @@ function App() {
     });
 
     const data = await res.json();
-    console.log(data);
+    
     updateCharacterInStory(data);
     setStories(stories.map(story=>story.id===data.id?
       {...story, plotpoints:data.plotpoints, characters:data.characters, updatedOn:data.updatedOn}:story))
@@ -240,7 +240,7 @@ function App() {
       updatedOn:character.updatedOn 
       }
 
-      console.log(upChar);
+      
     const res = await fetch(`${serverURL}characters/${id}`,{
       method:'PUT',
       headers:{
@@ -374,7 +374,7 @@ const onUserDeleteAccOnly = async(id)=>{
     setPlotpoints(plotpoints.map(plot=>plot.id===data.id?{...plot,creator:data.creator,updatedOn:data.updatedOn}:plot));
   })
 
-  fetch(`${serverURL}users/${id}`, {
+ await fetch(`${serverURL}users/${id}`, {
     method:'DELETE'
   })
 
@@ -397,7 +397,6 @@ const onStoryDelete = async(id,creator)=>{
       featuredIn:char.featuredIn.filter(feat=>feat.id!==id),
       updatedOn:new Date()};
     
-      console.log(uppChar);
       const res = await fetch(`${serverURL}characters/${char.id}`,{
         method:'PUT',
         headers:{
@@ -433,7 +432,7 @@ const onCharacterDelete = async (id, creator)=>{
   })
 
   stories.filter(story=>story.creator===creator).forEach(async story=>{
-    const uppStory={...story, characters:characters.filter(char=>char.id!==id), updatedOn:new Date()}
+    const uppStory={...story, characters:story.characters.filter(char=>char.id!==id), updatedOn:new Date()}
     const res = await fetch(`${serverURL}stories/${story.id}`,{
       method:'PUT',
       headers:{
@@ -559,7 +558,8 @@ const onPlotpointDelete = async (id,story)=>{
             <Route 
               path={`/character=${character.id}`} 
               element={<CharacterPage char={character}
-              myCreation={character.creator!==-1&&user===character.creator} 
+              myCreation={character.creator!==-1&&user===character.creator}
+              onDelete={onCharacterDelete} 
               />}/>
               <Route
                 path={`/character=${character.id}/editor`}
