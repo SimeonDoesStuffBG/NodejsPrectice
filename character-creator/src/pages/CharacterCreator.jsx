@@ -7,7 +7,7 @@ const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
     const nav = useNavigate();
 
     useEffect(()=>{     
-        if(creator===-1){//if a user is not logged in we get redirected back to the main page
+        if(creator===-1 || (curChar!==null && curChar.creator!==creator)){//if a user is not logged in we get redirected back to the main page
         nav("/");
         }
 

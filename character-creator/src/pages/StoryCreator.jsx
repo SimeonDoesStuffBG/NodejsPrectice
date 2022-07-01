@@ -11,7 +11,7 @@ const StoryCreator = ({curStory,onCreate, creator, characters}) => {
 
     useEffect(()=>{
         
-        if(creator===-1)
+        if(creator===-1 || (curStory!==null && curStory.creator!=creator))
             nav('/');
         if(curStory!==null){
             setTitle(curStory.title);
