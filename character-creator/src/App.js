@@ -582,7 +582,7 @@ const onPlotpointDelete = async (id,story)=>{
 
         {plotpoints.map(plot=>
               <React.Fragment key={plot.id}>
-                <Route path={`/plotpoint=${plot.id}`} element={<PlotpointPage plotpoint={plot} myPlotpoint={plot.creator!==-1&&plot.creator===user}/>}/>
+                <Route path={`/plotpoint=${plot.id}`} element={<PlotpointPage plotpoint={plot} myPlotpoint={plot.creator!==-1&&plot.creator===user} onDelete={onPlotpointDelete}/>}/>
                 <Route path={`/plotpoint=${plot.id}/editor`} element={<PlotpointCreator curPlotpoint={plot} story={stories.filter(story=>story.id===plot.story)[0]} onCreate={onEditPlotpoint} characters={characters.filter(char=>char.creator===plot.creator)} creator={user}/>}/>
               </React.Fragment>  
         )}
