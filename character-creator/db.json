@@ -70,7 +70,7 @@
         }
       ],
       "createdOn": "2022-06-23T20:38:24.298Z",
-      "updatedOn": "2022-06-30T17:16:38.153Z",
+      "updatedOn": "2022-07-01T13:50:10.426Z",
       "id": 1
     },
     {
@@ -108,7 +108,7 @@
         }
       ],
       "createdOn": "2022-06-27T10:12:07.115Z",
-      "updatedOn": "2022-06-27T10:12:07.115Z",
+      "updatedOn": "2022-07-01T13:50:10.429Z",
       "id": 3
     },
     {
@@ -129,7 +129,7 @@
         }
       ],
       "createdOn": "2022-06-27T10:20:28.953Z",
-      "updatedOn": "2022-06-27T10:20:28.953Z",
+      "updatedOn": "2022-07-01T13:50:10.431Z",
       "id": 4
     },
     {
@@ -150,7 +150,7 @@
         }
       ],
       "createdOn": "2022-06-29T13:07:36.608Z",
-      "updatedOn": "2022-06-29T13:07:36.608Z",
+      "updatedOn": "2022-07-01T13:50:10.433Z",
       "id": 5
     },
     {
@@ -195,7 +195,7 @@
         }
       ],
       "createdOn": "2022-06-29T20:23:28.751Z",
-      "updatedOn": "2022-06-29T20:23:28.751Z",
+      "updatedOn": "2022-07-01T13:50:10.437Z",
       "id": 6
     }
   ],
@@ -336,41 +336,6 @@
       "createdOn": "2022-06-29T20:22:14.465Z",
       "id": 1,
       "updatedOn": "2022-07-01T12:15:36.403Z"
-    },
-    {
-      "title": "Story",
-      "creator": 6,
-      "characters": [
-        {
-          "id": 3,
-          "name": "Duncan"
-        },
-        {
-          "id": 1,
-          "name": "John Doe"
-        }
-      ],
-      "plotpoints": [],
-      "createdOn": "2022-06-30T21:06:58.871Z",
-      "updatedOn": "2022-06-30T21:06:58.871Z",
-      "id": 2
     }
-  ],
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

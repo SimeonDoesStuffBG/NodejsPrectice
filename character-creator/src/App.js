@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import SignIn from './pages/SignIn';
 import Main from './pages/Main';
 import Nav from './components/Nav';
@@ -20,6 +20,7 @@ function App() {
   const [characters,setCharacters]=useState([]);
   const [stories, setStories]=useState([]);
   const [plotpoints, setPlotpoints]=useState([]);
+  //const nav =useNavigate();
 
   useEffect(() => {
     const getUsers = async()=>{
@@ -301,25 +302,25 @@ const onUserDeleteComplete = async(id)=>{
     await fetch(`${serverURL}stories/${story.id}`,{
       method:'DELETE'
     })
-
-    setStories(stories.filter(stor=>stor.id!==story.id));
   });
+
+  setStories(stories.filter(story=>id!==story.id));
 
   characters.filter(char=>char.creator===id).forEach(async char=> {
     await fetch(`${serverURL}characters/${char.id}`,{ 
       method:'DELETE'
     })
-
-    setCharacters(characters.filter(ch=>ch.id!==char.id));
   })
+
+  setCharacters(characters.filter(char=>id!==char.id));
 
   plotpoints.filter(plotpoint=>plotpoint.creator===id).forEach(async plotpoint=>{
     await fetch(`${serverURL}plotpoints/${plotpoint.id}`,{
       method:'DELETE'
     })
-
-    setPlotpoints(plotpoints.filter(plot=>plot.id!==plotpoint.id));
   })
+
+  setPlotpoints(plotpoints.filter(plot=>plot.id!==id));
 
   await fetch(`${serverURL}users/${id}`, {
     method:'DELETE'
@@ -378,8 +379,124 @@ const onUserDeleteAccOnly = async(id)=>{
   })
 
   setUsers(users.filter(user=>user.id!==id));
+  
 }
 
+const onStoryDelete = async(id,creator)=>{
+  plotpoints.filter(plot=>plot.story===id).forEach(async plot=>{
+    await fetch(`${serverURL}plotpoints/${plot.id}`,{
+      method:'DELETE'
+    })
+  }
+  )
+
+  setPlotpoints(plotpoints.filter(plot=>plot.story!==id));
+
+  characters.filter(char=>creator===char.creator).forEach(async char=>{
+    const uppChar = {...char, 
+      featuredIn:char.featuredIn.filter(feat=>feat.id!==id),
+      updatedOn:new Date()};
+    
+      console.log(uppChar);
+      const res = await fetch(`${serverURL}characters/${char.id}`,{
+        method:'PUT',
+        headers:{
+          "Content-type":"application/json"
+        },
+        body:JSON.stringify(uppChar)
+      })
+
+      const data = await res.json();
+      setCharacters(characters.map(char=>char.id===data.id?{...char,featuredIn:data.featuredIn, updatedOn:data.updatedOn}:char))
+    })
+  
+  await fetch(`${serverURL}stories/${id}`,{
+    method:'DELETE'
+  });
+  setStories(stories.filter(story=>story.id!==id))
+}
+
+const onCharacterDelete = async (id, creator)=>{
+  plotpoints.filter(plot=>plot.creator===creator).forEach(async plot=>{
+    const uppPlot = {...plot,characters:plot.characters.filter(char=>char.id===id),updatedOn:new Date()}
+
+    const res = await fetch(`${serverURL}plotpoints/${plot.id}`,{
+      method:'PUT',
+      headers:{
+        "Content-type":"application/json"
+      },
+      body:JSON.stringify(uppPlot)
+    });
+
+    const data = await res.json();
+    setPlotpoints(plotpoints.map(pl=>pl.id===data.id?{...pl,characters:data.characters,updatedOn:data.updatedOn}:pl))
+  })
+
+  stories.filter(story=>story.creator===creator).forEach(async story=>{
+    const uppStory={...story, characters:characters.filter(char=>char.id!==id), updatedOn:new Date()}
+    const res = await fetch(`${serverURL}stories/${story.id}`,{
+      method:'PUT',
+      headers:{
+        "Content-type":"application/json"
+      },
+      body:JSON.stringify(uppStory)
+    });
+
+    const data = await res.json();
+    setStories(stories.map(st=>st.id===story.id?{...st,characters:data.characters, updatedOn:data.updatedOn}:st));
+  })
+
+  characters.filter(char=>char.creator===creator&&char.id!==id).forEach(async char=>{
+    const uppchar = {...char,
+      relationships:{
+        Friends:char.relationships.Friends.filter(friend=>friend.id!==id),
+        Enemies:char.relationships.Enemies.filter(enemy=>enemy.id!==id),
+        Family:char.relationships.Family.filter(relative=>relative.id!==id),
+        Lovers:char.relationships.Lovers.filter(lover=>lover.id!==id)
+      },
+      updatedOn:new Date()
+    }
+
+    const res = await fetch(`${serverURL}characters/${char.id}`,{
+      method:'PUT',
+      headers:{
+        "Content-type":"application/json"
+      },
+      body:JSON.stringify(uppchar)
+    })
+
+    const data = await res.json();
+    setCharacters(characters.map(ch=>ch.id===data.id?{...ch,relationships:data.relationships, updatedOn:data.updatedOn}:ch));
+  })
+
+  await fetch(`${serverURL}characters/${id}`,{
+    method:'DELETE'
+  })
+
+  setCharacters(characters.filter(char=>char.id!==id));
+}
+
+const onPlotpointDelete = async (id,story)=>{
+  const storyToUpdate = await fetchStory(story);
+  const upStory = {...storyToUpdate,plotpoints:storyToUpdate.plotpoints.filter(plot=>plot.id!==id),updatedOn:new Date()};
+
+  const res = await fetch(`${serverURL}stories/${story}`,{
+    method:'PUT',
+    headers:{
+      "Content-type":"application/json"
+    },
+    body:JSON.stringify(upStory)
+  })
+  
+  const data = await res.json();
+  setStories(stories.map(stor=>stor.id===story?{...stor,plotpoints:data.plotpoints, updatedOn:data.updatedOn}:stor))
+
+  await fetch(`${serverURL}plotpoints/${id}`,{
+    method:'DELETE'
+  })
+
+  setPlotpoints(plotpoints.filter(plot=>plot.id!==id));
+}
   useEffect(()=>{
     const Init = async()=>{
       const chars = await fetchCharacters();
@@ -456,7 +573,7 @@ const onUserDeleteAccOnly = async(id)=>{
 
         {stories.map(story=>
           <React.Fragment key={story.id}>
-            <Route path={`/story=${story.id}`} element={<StoryPage story={story} myStory={story.creator!==-1&&story.creator===user}/>}/>
+            <Route path={`/story=${story.id}`} element={<StoryPage story={story} myStory={story.creator!==-1&&story.creator===user} onDelete={onStoryDelete}/>}/>
             <Route path={`/story=${story.id}/editor`} element={<StoryCreator curStory={story} onCreate={onEditStory} creator={user} characters={characters.filter(char=>char.creator===story.creator)}/>}/>
             <Route path={`/story=${story.id}/plotpoint-creator`} element={<PlotpointCreator onCreate={onCreatePlotpoint} story={story} characters={characters.filter(char=>char.creator===story.creator)} creator={user}/>}/>
            

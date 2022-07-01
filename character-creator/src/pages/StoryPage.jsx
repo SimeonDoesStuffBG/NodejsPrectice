@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const StoryPage = ({story, myStory}) => {
+const StoryPage = ({story, myStory, onDelete}) => {
 
   const [creatorName,setCreatorName]=useState('[deleted]');
+  const nav= useNavigate();
   //const [possibleChars,setPossibleChars]=useState([]);
   useEffect(()=>{
     const getCreator = async()=>{
@@ -24,8 +25,9 @@ const StoryPage = ({story, myStory}) => {
     <div>
       <h1>{story.title}</h1>
       <p>created by {story.creator!==-1?<Link to={`/user=${story.creator}`}>{creatorName}</Link>:creatorName}</p>
-     {myStory&&<Link to={`editor`}><button>Edit Story</button></Link>}
-     
+     {myStory&&<div><Link to={`editor`}><button>Edit Story</button></Link>
+     <button title="Delete this story and all of its plotpoints" onClick={()=>{onDelete(story.id, story.creator); nav(`/user=${story.creator}`)}}>Delete Story</button></div>
+    }
      <div className="list-layout">
         <div>
           <h4>Characters</h4>
