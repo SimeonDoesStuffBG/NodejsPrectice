@@ -28,7 +28,7 @@ const PlotpointPage = ({plotpoint, myPlotpoint, onDelete}) => {
         <p>Part of the Story <Link to={`/story=${plotpoint.story}`}>{storyTitle}</Link> created by {plotpoint.creator!==-1?<Link to={`/user=${plotpoint.creator}`}> {creatorName}</Link>:creatorName}</p>    
         {myPlotpoint&&<>
             <Link to={`editor`}><button>Edit plotpoint</button></Link>
-            <button title="Delete this plotpoint from the story(does not remove included characters" onClick={()=>{onDelete(plotpoint.id, plotpoint.story); nav(`/story=${plotpoint.story}`)}}>Delete</button>
+            <button title="Delete this plotpoint from the story(does not remove included characters" onClick={()=>{onDelete(plotpoint.id, plotpoint.story); nav(`/story=${plotpoint.story}`)}}>Delete plotpoint</button>
         </>}
         <div className="list-container">
             <div>{plotpoint.description}</div>
