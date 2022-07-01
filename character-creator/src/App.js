@@ -9,6 +9,8 @@ import CharacterCreator from './pages/CharacterCreator';
 import CharacterPage from './pages/CharacterPage';
 import StoryCreator from './pages/StoryCreator';
 import StoryPage from './pages/StoryPage';
+import PlotpointPage from './pages/PlotpointPage';
+import PlotpointCreator from './pages/PlotpointCreator';
 
 function App() {
   const serverURL = "http://localhost:5000/";
@@ -17,7 +19,8 @@ function App() {
   const [user,setUser] = useState(-1);
   const [characters,setCharacters]=useState([]);
   const [stories, setStories]=useState([]);
- 
+  const [plotpoints, setPlotpoints]=useState([]);
+
   useEffect(() => {
     const getUsers = async()=>{
       const usersFromServer = await fetchUsers();
@@ -98,9 +101,23 @@ function App() {
       },
       body:JSON.stringify(story)
     })
-    updateCharacterInStory(res.json());
-    setStories([...stories,res.json()]);
+    const data= await res.json();
+    updateCharacterInStory(data);
+    setStories([...stories,data]);
   } 
+
+  const onCreatePlotpoint = async(plotpoint, id)=>{
+    const res=await fetch(`${serverURL}plotpoints`,{
+      method:'post',
+      headers:{
+        'Content-type':'application/json'
+      },
+      body:JSON.stringify(plotpoint)
+    })
+    const data = await res.json();
+    updateStoryPlotpoint(data);
+    setPlotpoints([...plotpoints,data]);
+  }
 
   const onEditStory = async(story, id)=>{
     const storyToUpdate = await fetchStory(id);
@@ -130,16 +147,45 @@ function App() {
     }:story))
   };
 
+  const updateStoryPlotpoint = async plotpoint=>{
+    
+    const storyToFix=await fetchStory(plotpoint.story);
+    const storyPlotpoints = storyToFix.plotpoints;
+    
+    if(storyToFix.plotpoints.every(plot=>plot.id!==plotpoint.id)){
+     storyPlotpoints.push({id:plotpoint.id, title:plotpoint.title, timeIndex:plotpoint.timeIndex});
+     storyPlotpoints.sort((a,b)=>a.id-b.id);
+    }
+    const charsToAdd=plotpoint.characters.filter(char=>storyToFix.characters.every(ch=>ch.id!==char.id));
+    
+    const fixxedStory={...storyToFix,
+      plotpoints:storyPlotpoints,
+      characters:[...storyToFix.characters,...charsToAdd],
+      updatedOn:new Date()
+    }
+
+    const res = await fetch(`${serverURL}stories/${storyToFix.id}`,{
+      method:'PUT',
+      headers:{
+        "Content-type":"application/json"
+      },
+      body:JSON.stringify(fixxedStory)
+    });
+
+    const data = await res.json();
+    console.log(data);
+    updateCharacterInStory(data);
+    setStories(stories.map(story=>story.id===data.id?
+      {...story, plotpoints:data.plotpoints, characters:data.characters, updatedOn:data.updatedOn}:story))
+  }
+  
   const updateCharacterInStory = (story)=>{
-    story.characters.forEach(async(char)=>{
+    characters.filter(char=>story.characters.some(ch=>ch.id===char.id) && char.featuredIn.every(stor=>stor.id!==story.id)).forEach(async(char)=>{
       const charToEdit = await fetchCharacter(char.id);
-      let featuredStories=charToEdit.featuredIn;
-      featuredStories.push({id:story.id,title:story.title})
-      
-      featuredStories=featuredStories.sort((a, b)=>a-b).filter((a,b)=>{return b+1>=featuredStories.length||a.id!=featuredStories[b+1].id});
       
       const uppChar = {...charToEdit, 
-        featuredIn:featuredStories}//.sort((a,b)=>{a.id-b.id}).filter((a,b)=>a.id!==b.id)}
+        featuredIn:[...charToEdit.featuredIn,{id:story.id,title:story.title}], 
+      }
 
       const res = await fetch(`${serverURL}characters/${char.id}`, {
         method:'PUT',
@@ -151,6 +197,26 @@ function App() {
       const data = await res.json();
       setCharacters(characters.map(charac=>charac.id===char.id?{...charac,featuredIn:data.featuredIn}:charac))
     })
+
+    characters.filter(char=>char.featuredIn.some(st=>st.id===story.id) && story.characters.every(ch=>char.id!==ch.id)).forEach(
+      async char=>{
+        const charToEdit = await fetchCharacter(char.id);
+      
+        const uppChar = {...charToEdit, 
+          featuredIn:charToEdit.featuredIn.filter(stor=>stor.id!==story.id),
+          updatedOn:new Date()
+        }
+  
+        const res = await fetch(`${serverURL}characters/${char.id}`, {
+          method:'PUT',
+          headers:{
+            "Content-type":"application/json",
+          },
+          body:JSON.stringify(uppChar)
+        })
+        const data = await res.json();
+        setCharacters(characters.map(charac=>charac.id===char.id?{...charac,featuredIn:data.featuredIn,updatedOn:data.updatedOn}:charac))
+      })
   }
 
   const onEditCharacter = async (character, id)=>{
@@ -196,14 +262,44 @@ function App() {
   featuredIn:data.featuredIn,
   updatedOn:data.updatedOn
 }:char))
+}
+
+const onEditPlotpoint = async(plotpoint,id)=>{
+  const plotpointToUpdate= await fetchPlotpoint(id);
+  const uppPlot = {...plotpointToUpdate,
+    title:plotpoint.title,
+    description:plotpoint.description,
+    timeIndex:plotpoint.timeIndex,
+    characters:plotpoint.characters,
+    updatedOn:plotpoint.updatedOn
   }
+
+  const res= await fetch(`${serverURL}plotpoints/${id}`,{
+    method:'PUT',
+    headers:{
+      "Content-type":"application/json"
+    },
+    body:JSON.stringify(uppPlot)
+  })
+  const data = await res.json();
+  updateStoryPlotpoint(data);
+  setPlotpoints(plotpoints.map(plot=>plot.id===id?{
+    title:data.title,
+    description:data.description,
+    timeIndex:data.timeIndex,
+    characters:data.characters,
+    updatedOn:data.updatedOn
+  }:plot))
+}
 
   useEffect(()=>{
     const Init = async()=>{
       const chars = await fetchCharacters();
       const stories = await fetchStories();
+      const plotpoints = await fetchPlotpoints();
       setStories(stories);
       setCharacters(chars);
+      setPlotpoints(plotpoints);
     } 
 
     Init();
@@ -219,6 +315,20 @@ function App() {
   const fetchStories = async()=>{
     const stories = await fetch(`${serverURL}stories`);
     const data = await stories.json();
+
+    return data;
+  }
+
+  const fetchPlotpoints = async()=>{
+    const plots = await fetch(`${serverURL}plotpoints`);
+    const data = await plots.json();
+
+    return data;
+  }
+
+  const fetchPlotpoint = async(id)=>{
+    const plot = await fetch(`${serverURL}plotpoints/${id}`);
+    const data =await plot.json();
 
     return data;
   }
@@ -261,7 +371,16 @@ function App() {
           <React.Fragment key={story.id}>
             <Route path={`/story=${story.id}`} element={<StoryPage story={story} myStory={story.creator===user}/>}/>
             <Route path={`/story=${story.id}/editor`} element={<StoryCreator curStory={story} onCreate={onEditStory} creator={user} characters={characters.filter(char=>char.creator===story.creator)}/>}/>
+            <Route path={`/story=${story.id}/plotpoint-creator`} element={<PlotpointCreator onCreate={onCreatePlotpoint} story={story} characters={characters.filter(char=>char.creator===story.creator)} creator={user}/>}/>
+           
           </React.Fragment>
+        )}
+
+        {plotpoints.map(plot=>
+              <React.Fragment key={plot.id}>
+                <Route path={`/plotpoint=${plot.id}`} element={<PlotpointPage plotpoint={plot}/>}/>
+                <Route path={`/plotpoint=${plot.id}/editor`} element={<PlotpointCreator curPlotpoint={plot} onCreate={onEditPlotpoint} characters={characters.filter(char=>char.creator===plot.creator)} creator={user}/>}/>
+              </React.Fragment>  
         )}
 
         {users.map(thisUser=>

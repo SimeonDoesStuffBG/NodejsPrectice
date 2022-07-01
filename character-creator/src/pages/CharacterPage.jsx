@@ -29,6 +29,48 @@ const CharacterPage = ({char, myCreation}) => {
         <div className="Relationships">
         </div>
       </section>
+
+      {char.featuredIn.length>0 && <section className="featured Stories">
+        <h4>The Character features in the following stories:</h4>
+        <ul>
+          {char.featuredIn.map(story=>
+            <li key={story.id}><Link to={`/story=${story.id}`}>{story.title}</Link></li>)}
+        </ul>
+      </section>}
+      
+      <section className="list-relations">
+        <div><h4>Friends:</h4>
+          <ul>
+            {char.relationships.Friends.map(friend=>
+              <li key={friend.id}>{friend.name}</li>
+            )}
+          </ul>
+        </div>
+
+        <div><h4>Enemies:</h4>
+          <ul>
+            {char.relationships.Enemies.map(enemy=>
+              <li key={enemy.id}>{enemy.name}</li>
+            )}
+          </ul>
+        </div>
+
+        <div><h4>Family:</h4>
+          <ul>
+            {char.relationships.Family.map(relative=>
+              <li key={relative.id}>{relative.name}</li>
+            )}
+          </ul>
+        </div>
+
+        <div><h4>Lovers:</h4>
+          <ul>
+            {char.relationships.Lovers.map(lover=>
+              <li key={lover.id}>{lover.name}</li>
+            )}
+          </ul>
+        </div>
+      </section>
     </div>
   )
 }

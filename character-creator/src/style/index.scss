@@ -32,6 +32,12 @@ $ThumbnailWidth:320px;
       grid-column-gap:20px;
       //column-rule: 3px double black;
     }
+
+    &-relations{
+      display:grid;
+      grid-template-columns: auto auto auto auto;
+      grid-column-gap:20px;
+    }
   }
 
   .characterThing{

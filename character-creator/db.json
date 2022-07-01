@@ -196,7 +196,88 @@
       "id": 6
     }
   ],
-  "plotpoints": [],
+  "plotpoints": [
+    {
+      "title": "PPPd",
+      "creator": 6,
+      "story": 1,
+      "timeIndex": 1,
+      "description": "aassd",
+      "characters": [
+        {
+          "id": 3,
+          "name": "Duncan"
+        },
+        {
+          "id": 4,
+          "name": "Leo"
+        },
+        {
+          "id": 6,
+          "name": "Simeon"
+        }
+      ],
+      "createdOn": "2022-07-01T07:41:05.537Z",
+      "updatedOn": "2022-07-01T07:41:05.537Z",
+      "id": 1
+    },
+    {
+      "title": "1233",
+      "creator": 6,
+      "story": 1,
+      "timeIndex": 1,
+      "description": "dddds",
+      "characters": [
+        {
+          "id": 5,
+          "name": "Dominic"
+        }
+      ],
+      "createdOn": "2022-07-01T07:41:49.639Z",
+      "updatedOn": "2022-07-01T07:41:49.639Z",
+      "id": 2
+    },
+    {
+      "title": "eee",
+      "creator": 6,
+      "story": 1,
+      "timeIndex": 1,
+      "description": "",
+      "characters": [
+        {
+          "id": 1,
+          "name": "John Doe"
+        },
+        {
+          "id": 4,
+          "name": "Leo"
+        },
+        {
+          "id": 6,
+          "name": "Simeon"
+        }
+      ],
+      "createdOn": "2022-07-01T07:42:58.628Z",
+      "updatedOn": "2022-07-01T07:42:58.628Z",
+      "id": 3
+    },
+    {
+      "title": "Plothole",
+      "creator": 6,
+      "story": 1,
+      "timeIndex": 1,
+      "description": "",
+      "characters": [
+        {
+          "id": 1,
+          "name": "John Doe"
+        }
+      ],
+      "createdOn": "2022-07-01T07:44:16.096Z",
+      "updatedOn": "2022-07-01T07:44:16.096Z",
+      "id": 4
+    }
+  ],
   "stories": [
     {
       "title": "Not Dune",
@@ -211,14 +292,43 @@
           "name": "Duncan"
         },
         {
+          "id": 6,
+          "name": "Simeon"
+        },
+        {
+          "id": 4,
+          "name": "Leo"
+        },
+        {
           "id": 5,
           "name": "Dominic"
         }
       ],
-      "plotpoints": [],
+      "plotpoints": [
+        {
+          "id": 1,
+          "title": "PPPd",
+          "timeIndex": 1
+        },
+        {
+          "id": 2,
+          "title": "1233",
+          "timeIndex": 1
+        },
+        {
+          "id": 3,
+          "title": "eee",
+          "timeIndex": 1
+        },
+        {
+          "id": 4,
+          "title": "Plothole",
+          "timeIndex": 1
+        }
+      ],
       "createdOn": "2022-06-29T20:22:14.465Z",
       "id": 1,
-      "updatedOn": "2022-06-30T21:35:56.933Z"
+      "updatedOn": "2022-07-01T07:44:16.580Z"
     },
     {
       "title": "Story",
