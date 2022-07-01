@@ -20,7 +20,7 @@ const Nav = ({loggedUser, LogOff}) => {
 
   return (
     <div>
-        <Link to="/"> Main Page</Link>
+        <div className="btn"><Link to="/"> Main Page</Link></div>
         <div className="user">
             {loggedUser===-1 ? <div className="userEnter">
             <Link to="/signin">Sign in</Link>

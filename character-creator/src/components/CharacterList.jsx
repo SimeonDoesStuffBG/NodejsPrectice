@@ -11,7 +11,7 @@ const CharacterList = ({characters}) => {
     return (
     
     <div className="list-container">
-        <input type="text" value={filter} onChange={e=>setFilter(e.target.value)} placeholder="SearchCharacter"/>
+        <input className="SearchBar" type="text" value={filter} onChange={e=>setFilter(e.target.value)} placeholder="SearchCharacter"/>
         <div className="list">{characters.filter(char=>lookFor(char.name,filter)).map(character=><CharacterThumbnail key={character.id} character={character}/>)}</div>
     </div>
   )

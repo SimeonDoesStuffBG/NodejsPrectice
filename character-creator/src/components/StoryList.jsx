@@ -11,7 +11,7 @@ const StoryList = ({stories}) => {
     return (
     
     <div className="list-container">
-        <input type="text" value={filter} onChange={e=>setFilter(e.target.value)} placeholder="SearchStory"/>
+        <input className="SearchBar" type="text" value={filter} onChange={e=>setFilter(e.target.value)} placeholder="SearchStory"/>
         <div className="list">{stories.filter(story=>lookFor(story.name,filter)).map(story=><StoryThumbnail key={story.id} story={story}/>)}</div>
     </div>
   )

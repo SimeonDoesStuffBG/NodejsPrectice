@@ -1,5 +1,11 @@
 $ThumbnailWidth:320px;
-  
+
+.SearchBar{
+  height:25px;
+  width:250px;
+  border-radius: 0%;
+  border: 1px solid gray;
+}
   .user{
     float:right;
 
@@ -16,11 +22,27 @@ $ThumbnailWidth:320px;
       font-size: large;
     }
   }
+
+  .btn{
+    background-color: darkgreen;
+    width:90px;
+    height:45px;
+    *{
+      display:block;
+      float:center;
+      text-align:center;      
+      font-size:15px;
+      color:lightyellow;
+      text-decoration: none;
+    }
+
+  }
   
   .list{
     margin: 10px;
     column-gap:20px;
     column-width: $ThumbnailWidth;
+    
     
     &-container{
       display:grid;
