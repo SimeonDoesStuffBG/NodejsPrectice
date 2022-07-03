@@ -1,0 +1,369 @@
+{
+  "users": [
+    {
+      "username": "LeoTheBGSheep",
+      "email": "leothebackgroundsheep@gmail.com",
+      "password": "123",
+      "dateOfReg": "Tue Jun 21 2022 13:41:03 GMT+0300 (Eastern European Summer Time)",
+      "dateOfLast": "Tue Jun 21 2022 13:41:03 GMT+0300 (Eastern European Summer Time)",
+      "id": 1
+    },
+    {
+      "username": "LeoTheBGS",
+      "email": "leothebackgroundsheep@gmail.com",
+      "password": "123",
+      "dateOfReg": "Tue Jun 21 2022 13:56:22 GMT+0300 (Eastern European Summer Time)",
+      "dateOfLast": "Tue Jun 21 2022 13:56:22 GMT+0300 (Eastern European Summer Time)",
+      "id": 2
+    },
+    {
+      "username": "sgmilev",
+      "email": "simeongmilev432@gmail.com",
+      "password": "ert",
+      "dateOfReg": "Tue Jun 21 2022 14:17:01 GMT+0300 (Eastern European Summer Time)",
+      "dateOfLast": "Tue Jun 21 2022 14:17:01 GMT+0300 (Eastern European Summer Time)",
+      "id": 6
+    },
+    {
+      "username": "aa",
+      "email": "sss@aaa.dd",
+      "password": "123",
+      "dateOfReg": "Tue Jun 21 2022 16:15:27 GMT+0300 (Eastern European Summer Time)",
+      "dateOfLast": "Tue Jun 21 2022 16:15:27 GMT+0300 (Eastern European Summer Time)",
+      "id": 7
+    }
+  ],
+  "characters": [
+    {
+      "name": "John Doe",
+      "creator": 6,
+      "gender": "nb",
+      "description": "Hi, I'm bob.",
+      "relationships": {
+        "Friends": [
+          {
+            "id": 4,
+            "name": "Leo"
+          },
+          {
+            "id": 3,
+            "name": "Duncan"
+          }
+        ],
+        "Enemies": [],
+        "Family": [
+          {
+            "id": 3,
+            "name": "Duncan"
+          },
+          {
+            "id": 4,
+            "name": "Leo"
+          }
+        ],
+        "Lovers": []
+      },
+      "featuredIn": [
+        {
+          "id": 1,
+          "title": "Not Dune"
+        }
+      ],
+      "createdOn": "2022-06-23T20:38:24.298Z",
+      "updatedOn": "2022-07-01T15:08:51.663Z",
+      "id": 1
+    },
+    {
+      "name": "Paul",
+      "creator": -1,
+      "gender": "",
+      "description": "Somebody Once Told me\nThe World is gonna roll me",
+      "relationships": {
+        "Friends": [],
+        "Enemies": [],
+        "Family": [],
+        "Lovers": []
+      },
+      "featuredIn": [],
+      "createdOn": "2022-06-23T20:59:30.045Z",
+      "updatedOn": "2022-06-23T20:59:30.045Z",
+      "id": 2,
+      "upDatedOn": "2022-07-01T11:22:28.948Z"
+    },
+    {
+      "name": "Duncan",
+      "creator": 6,
+      "gender": "M",
+      "description": "A cool dude",
+      "relationships": {
+        "Friends": [],
+        "Enemies": [],
+        "Family": [],
+        "Lovers": []
+      },
+      "featuredIn": [
+        {
+          "id": 1,
+          "title": "Not Dune"
+        },
+        {
+          "id": 2,
+          "title": "jjh"
+        },
+        {
+          "id": 3,
+          "title": "k;lg;dskg;s"
+        }
+      ],
+      "createdOn": "2022-06-27T10:12:07.115Z",
+      "updatedOn": "2022-07-01T15:08:51.671Z",
+      "id": 3
+    },
+    {
+      "name": "Leo",
+      "creator": 6,
+      "gender": "",
+      "description": "My mate",
+      "relationships": {
+        "Friends": [],
+        "Enemies": [],
+        "Family": [],
+        "Lovers": []
+      },
+      "featuredIn": [
+        {
+          "id": 1,
+          "title": "Not Dune"
+        },
+        {
+          "id": 3,
+          "title": "k;lg;dskg;s"
+        }
+      ],
+      "createdOn": "2022-06-27T10:20:28.953Z",
+      "updatedOn": "2022-07-01T15:08:51.675Z",
+      "id": 4
+    },
+    {
+      "name": "Dominic",
+      "creator": 6,
+      "gender": "F",
+      "description": "A dude who likes stuff",
+      "relationships": {
+        "Friends": [],
+        "Enemies": [],
+        "Family": [],
+        "Lovers": []
+      },
+      "featuredIn": [
+        {
+          "id": 1,
+          "title": "Not Dune"
+        },
+        {
+          "id": 2,
+          "title": "jjh"
+        },
+        {
+          "id": 3,
+          "title": "k;lg;dskg;s"
+        }
+      ],
+      "createdOn": "2022-06-29T13:07:36.608Z",
+      "updatedOn": "2022-07-01T15:08:51.676Z",
+      "id": 5
+    },
+    {
+      "name": "Simeon",
+      "creator": 6,
+      "gender": "IDFK",
+      "description": "What's up my beardos and weirdos",
+      "relationships": {
+        "Friends": [
+          {
+            "id": 1,
+            "name": "John"
+          }
+        ],
+        "Enemies": [
+          {
+            "id": 4,
+            "name": "Leo"
+          }
+        ],
+        "Family": [
+          {
+            "id": 3,
+            "name": "Duncan"
+          },
+          {
+            "id": 1,
+            "name": "John"
+          }
+        ],
+        "Lovers": [
+          {
+            "id": 5,
+            "name": "Dominic"
+          }
+        ]
+      },
+      "featuredIn": [
+        {
+          "id": 1,
+          "title": "Not Dune"
+        }
+      ],
+      "createdOn": "2022-06-29T20:23:28.751Z",
+      "updatedOn": "2022-07-01T15:08:51.685Z",
+      "id": 6
+    }
+  ],
+  "plotpoints": [
+    {
+      "title": "PPPd",
+      "creator": 6,
+      "story": 1,
+      "timeIndex": 3,
+      "description": "aassdFFddh",
+      "characters": [],
+      "createdOn": "2022-07-01T07:41:05.537Z",
+      "updatedOn": "2022-07-01T15:09:07.220Z",
+      "id": 1
+    },
+    {
+      "title": "1233",
+      "creator": 6,
+      "story": 1,
+      "timeIndex": 1,
+      "description": "dddds",
+      "characters": [],
+      "createdOn": "2022-07-01T07:41:49.639Z",
+      "updatedOn": "2022-07-01T15:09:07.221Z",
+      "id": 2
+    },
+    {
+      "title": "eee",
+      "creator": 6,
+      "story": 1,
+      "timeIndex": 1,
+      "description": "",
+      "characters": [],
+      "createdOn": "2022-07-01T07:42:58.628Z",
+      "updatedOn": "2022-07-01T15:09:07.224Z",
+      "id": 3
+    },
+    {
+      "title": "Plothole",
+      "creator": 6,
+      "story": 1,
+      "timeIndex": 4,
+      "description": "",
+      "characters": [],
+      "createdOn": "2022-07-01T07:44:16.096Z",
+      "updatedOn": "2022-07-01T15:09:07.228Z",
+      "id": 4
+    }
+  ],
+  "stories": [
+    {
+      "title": "Not Dune",
+      "creator": 6,
+      "characters": [
+        {
+          "id": 1,
+          "name": "John Doe"
+        },
+        {
+          "id": 3,
+          "name": "Duncan"
+        },
+        {
+          "id": 6,
+          "name": "Simeon"
+        },
+        {
+          "id": 4,
+          "name": "Leo"
+        },
+        {
+          "id": 5,
+          "name": "Dominic"
+        }
+      ],
+      "plotpoints": [
+        {
+          "id": 2,
+          "title": "1233",
+          "timeIndex": 1
+        },
+        {
+          "id": 3,
+          "title": "eee",
+          "timeIndex": 1
+        },
+        {
+          "id": 1,
+          "title": "PPPd",
+          "timeIndex": 3
+        },
+        {
+          "id": 4,
+          "title": "Plothole",
+          "timeIndex": 4
+        }
+      ],
+      "createdOn": "2022-06-29T20:22:14.465Z",
+      "id": 1,
+      "updatedOn": "2022-07-01T15:09:07.230Z"
+    },
+    {
+      "title": "jjh",
+      "creator": 6,
+      "characters": [
+        {
+          "id": 3,
+          "name": "Duncan"
+        },
+        {
+          "id": 5,
+          "name": "Dominic"
+        },
+        {
+          "id": 7,
+          "name": "xxxcc"
+        }
+      ],
+      "plotpoints": [],
+      "createdOn": "2022-07-01T15:11:09.210Z",
+      "updatedOn": "2022-07-01T15:11:09.210Z",
+      "id": 2
+    },
+    {
+      "title": "k;lg;dskg;s",
+      "creator": 6,
+      "characters": [
+        {
+          "id": 3,
+          "name": "Duncan"
+        },
+        {
+          "id": 4,
+          "name": "Leo"
+        },
+        {
+          "id": 5,
+          "name": "Dominic"
+        },
+        {
+          "id": 6,
+          "name": "Simeon"
+        }
+      ],
+      "plotpoints": [],
+      "createdOn": "2022-07-01T15:11:35.708Z",
+      "updatedOn": "2022-07-01T15:11:35.708Z",
+      "id": 3
+    }
+  ]
+}
