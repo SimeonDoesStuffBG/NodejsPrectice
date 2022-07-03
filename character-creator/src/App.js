@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './pages/SignIn';
 import Main from './pages/Main';
 import Nav from './components/Nav';
@@ -15,20 +15,19 @@ import PlotpointCreator from './pages/PlotpointCreator';
 function App() {
   const serverURL = "http://localhost:5000/";
 
+  //states for:
+  //users
   const [users, setUsers]= useState([]);
-  const [changedUsers,setChangedUsers]=useState([]);
-  const [user,setUser] = useState(-1);
-
+  const [activeUser,setActiveUser] = useState(-1);
+  //characters
   const [characters,setCharacters]=useState([]);
-  const [changedChars,setChangedChars]=useState([]);
-
+  //stories
   const [stories, setStories]=useState([]);
-  const [changedStories,setChangedStories]=useState([]);
-
+  //plotpoints
   const [plotpoints, setPlotpoints]=useState([]);
-  const [changedPlots,setChangedPlots]=useState([]);
-  //const nav =useNavigate();
-
+  //end of States
+  
+  //fetchers/getters
   const fetchUsers = async()=>{
     const res = await fetch(`${serverURL}users`);
     let data = await res.json();
@@ -43,29 +42,65 @@ function App() {
     return data;
   }
 
-  const userExists = async(username,email)=>{
-    let users = await fetchUsers();
-    let data=users.filter(user=>user.username===username||user.email===email);
+  const fetchCharacters = async()=>{
+    const chars = await fetch(`${serverURL}characters`);
+    const data = await chars.json();
 
-    return data[0];
+    return data;
+  } 
+
+  const fetchStories = async()=>{
+    const stories = await fetch(`${serverURL}stories`);
+    const data = await stories.json();
+
+    return data;
   }
 
-  const onLogIn = async(username, password)=>{
-    const user = await userExists(username, '');
-    if(user===undefined || user.password!=password){
+  const fetchPlotpoints = async()=>{
+    const plots = await fetch(`${serverURL}plotpoints`);
+    const data = await plots.json();
+
+    return data;
+  }
+
+  const fetchPlotpoint = async(id)=>{
+    const plot = await fetch(`${serverURL}plotpoints/${id}`);
+    const data =await plot.json();
+
+    return data;
+  }
+
+  const fetchStory = async(id)=>{
+    const story = await fetch(`${serverURL}stories/${id}`);
+    const data = await story.json();
+
+    return data;
+  }
+  //end of fetchers
+
+  const userExists = (username,email)=>{
+    let userFound = users.filter(user=>user.username===username||user.email===email);
+
+    return userFound[0];
+  }
+
+  const onLogIn = (username, password)=>{
+    const user = userExists(username, '');
+    console.log(user);
+    if(user===undefined || user.password!==password){
       alert("Wrong Username or Password");
       return false;
     }
-    setUser(user.id);
+    setActiveUser(user.id);
     return true;
   }
 
   const onLogOff = ()=> {
-    setUser(-1);
+    setActiveUser(-1);
   }
 
   const onSignIn = async (user)=>{
-    if(await userExists(user.username, user.email)!=undefined){
+    if(userExists(user.username, user.email)!==undefined){
       alert("User already exists");
       return false;
     }
@@ -149,11 +184,30 @@ function App() {
       updatedOn:data.updatedOn
     }:story))
   };
+//Sync getters
+  const getUser = id=>{
+    const user=users.filter(us=>us.id===id);
+    return user[0];
+  }
+  const getCharacter=id=>{
+    const character=characters.filter(char=>char.id===id);
+    return character[0];
+  }  
 
-  const updateStoryPlotpoint = async plotpoint=>{
+  const getStory = id=>{
+    const story=stories.filter(stor=>stor.id===id);
+    return story[0];
+  }
+
+  const getPlotpoint=id=>{
+    const plotpoint=plotpoints.filter(plot=>plot.id===id);
+    return plotpoint[0];
+  }
+
+  const updateStoryPlotpoint = plotpoint=>{
     
-    const storyToFix=await fetchStory(plotpoint.story);
-    const storyPlotpoints = storyToFix.plotpoints.filter(plot=>plot.id!==plotpoint.id);
+    const storyToFix=getStory(plotpoint.story);
+    const storyPlotpoints = storyToFix.plotpoint!==undefined?[]:storyToFix.plotpoints.filter(plot=>plot.id!==plotpoint.id);
     
     storyPlotpoints.push({id:plotpoint.id, title:plotpoint.title, timeIndex:plotpoint.timeIndex});
 
@@ -165,59 +219,34 @@ function App() {
       characters:[...storyToFix.characters,...charsToAdd],
       updatedOn:new Date()
     }
-
-    const res = await fetch(`${serverURL}stories/${storyToFix.id}`,{
-      method:'PUT',
-      headers:{
-        "Content-type":"application/json"
-      },
-      body:JSON.stringify(fixxedStory)
-    });
-
-    const data = await res.json();
     
-    updateCharacterInStory(data);
-    setStories(stories.map(story=>story.id===data.id?
-      {...story, plotpoints:data.plotpoints, characters:data.characters, updatedOn:data.updatedOn}:story))
+    updateCharacterInStory(fixxedStory);
+    setStories(stories.map(story=>story.id===fixxedStory.id?
+      {...story, plotpoints:fixxedStory.plotpoints, characters:fixxedStory.characters, updatedOn:fixxedStory.updatedOn}:story))
   }
   
   const updateCharacterInStory = (story)=>{
-    characters.filter(char=>story.characters.some(ch=>ch.id===char.id) && char.featuredIn.every(stor=>stor.id!==story.id)).forEach(async(char)=>{
-      const charToEdit = await fetchCharacter(char.id);
+    story.characters.forEach(char=>{
+      const charToEdit = getCharacter(char.id);
       
+      if(charToEdit.featuredIn!==undefined && charToEdit.featuredIn.map(feat=>feat.id).indexOf(story.id)!==-1){return;}
       const uppChar = {...charToEdit, 
         featuredIn:[...charToEdit.featuredIn,{id:story.id,title:story.title}], 
-      }
-
-      const res = await fetch(`${serverURL}characters/${char.id}`, {
-        method:'PUT',
-        headers:{
-          "Content-type":"application/json",
-        },
-        body:JSON.stringify(uppChar)
-      })
-      const data = await res.json();
-      setCharacters(characters.map(charac=>charac.id===char.id?{...charac,featuredIn:data.featuredIn}:charac))
+      
+    }
+      setCharacters(characters.map(charac=>charac.id===char.id?{...charac,featuredIn:uppChar.featuredIn}:charac))
     })
 
-    characters.filter(char=>char.featuredIn.some(st=>st.id===story.id) && story.characters.every(ch=>char.id!==ch.id)).forEach(
-      async char=>{
-        const charToEdit = await fetchCharacter(char.id);
+    characters.filter(char=>char.featuredIn!==undefined && char.featuredIn.some(st=>st.id===story.id) && story.characters.every(ch=>char.id!==ch.id)).forEach(
+      char=>{
+        const charToEdit = getCharacter(char.id);
       
         const uppChar = {...charToEdit, 
           featuredIn:charToEdit.featuredIn.filter(stor=>stor.id!==story.id),
           updatedOn:new Date()
         }
-  
-        const res = await fetch(`${serverURL}characters/${char.id}`, {
-          method:'PUT',
-          headers:{
-            "Content-type":"application/json",
-          },
-          body:JSON.stringify(uppChar)
-        })
-        const data = await res.json();
-        setCharacters(characters.map(charac=>charac.id===char.id?{...charac,featuredIn:data.featuredIn,updatedOn:data.updatedOn}:charac))
+
+        setCharacters(characters.map(charac=>charac.id===char.id?{...charac,featuredIn:uppChar.featuredIn,updatedOn:uppChar.updatedOn}:charac))
       })
   }
 
@@ -496,70 +525,100 @@ const onPlotpointDelete = async (id,story)=>{
 }
   useEffect(()=>{
     const Init = async()=>{
-      const chars = await fetchCharacters();
-      const stories = await fetchStories();
-      const plotpoints = await fetchPlotpoints();
-      const users = await fetchUsers();
+      const users = await fetchUsers().then(
       
-      setUsers(users);
-      setStories(stories);
-      setCharacters(chars);
-      setPlotpoints(plotpoints);
+      ()=>{
+        
+        const chars = await fetchCharacters();
+        setCharacters(chars.map(char=>{
+          const creator = getUser(char.creator);
+          return {...char, creator:{id:creator.id, name:creator.username}};
+        })); 
+
+        characters.foreach(character=>{
+          setCharacters(characters.map(char=>{
+            let friends = char.relationships.Friends;
+            if(character.relationships.Friends.indexOf(char.id)!==-1 && friends.indexOf(character.id)===-1){
+              friends = [...friends, character.id];
+            }
+            
+            let enemies = char.relationships.Enemies;
+            if(character.relationships.Enemies.indexOf(char.id)!==-1 && enemies.indexOf(character.id)===-1){
+              enemies = [...enemies, character.id];
+            }
+
+            let family = char.relationships.Family;
+            if(character.relationships.Family.indexOf(char.id)!==-1 && family.indexOf(character.id)===-1){
+              family = [...family, character.id];
+            }
+
+            let lovers = char.relationships.Lovers;
+            if(character.relationships.Lovers.indexOf(char.id)!==-1 && lovers.indexOf(character.id===-1)){
+              lovers = [...lovers, character.id];
+            }
+
+            return {...char, relationships:{Friends:friends, Enemies:enemies, Family:family, Lovers:lovers}}
+          }))
+        })
+
+        setCharacters(characters.map(char=>{return {...char, 
+          relationships:{
+            Friends:char.relationships.Friends.map(friend=>{
+              const fr = getCharacter(friend);
+              return {id:fr.id, name:fr.name}; 
+            }),
+            Enemies:char.relationships.Enemies.map(enemy=>{
+              const enem = getCharacter(enemy);
+              return {id:enem.id, name:enem.id};
+            }),
+            Family:char.relationships.Family.map(relative=>{
+              const rel = getCharacter(relative);
+              return {id:rel.id, name:rel.name};
+            }),
+            Lovers:char.relationships.Lovers.map(lover=>{
+              const lov = getCharacter(lover);
+              return {id:lov.id, name:lov.name};
+            })
+          }}}))
+
+          const plotpoints = await fetchPlotpoints();
+          setPlotpoints(plotpoints);
+        
+          const stories = await fetchStories();
+          setStories(stories.map(story=>{
+            return {...story, plotpoints:plotpoints.filter(plot=>plot.story===story.id).map(plot=>{return {id:plot.id, title:plot.title, timeIndex:plot.timeIndex}})}
+          }));
+          stories.forEach(story=>updateCharacterInStory(story));
+          setStories(stories.map(story=>{
+          return {...story, characters:story.characters.map(char=>{
+            const ch = getCharacter(char);
+            return {id:ch.id, name:ch.name};
+          })}}))
+
+        
+    }
+      )
     } 
 
     Init();
   },[])
 
-  const fetchCharacters = async()=>{
-    const chars = await fetch(`${serverURL}characters`);
-    const data = await chars.json();
-    
-    return data;
-  } 
-
-  const fetchStories = async()=>{
-    const stories = await fetch(`${serverURL}stories`);
-    const data = await stories.json();
-
-    return data;
-  }
-
-  const fetchPlotpoints = async()=>{
-    const plots = await fetch(`${serverURL}plotpoints`);
-    const data = await plots.json();
-
-    return data;
-  }
-
-  const fetchPlotpoint = async(id)=>{
-    const plot = await fetch(`${serverURL}plotpoints/${id}`);
-    const data =await plot.json();
-
-    return data;
-  }
-
-  const fetchStory = async(id)=>{
-    const story = await fetch(`${serverURL}stories/${id}`);
-    const data = await story.json();
-
-    return data;
-  }
   return (
     <Router className="App">
-      <Nav loggedUser={user} LogOff={onLogOff}/>
+      <Nav loggedUser={activeUser} LogOff={onLogOff}/>
       <Routes>
         <Route path="/" exact element={<Main characters={characters} stories={stories}/>}/>
         <Route path="/signin" element={<SignIn onSignIn={onSignIn}/>}/>
         <Route path="/login" element={<Login onLogIn={onLogIn}/>}/>
-        <Route path="/character-creator" element={<CharacterCreator onCreate={onCreateCharacter} creator={user} otherChars={characters.filter(char=>char.creator===user)}/>}/>
-        <Route path="/story-creator" element={<StoryCreator onCreate={onCreateStory} creator={user} characters={characters.filter(char=>char.creator===user)}/>}/>
+        <Route path="/character-creator" element={<CharacterCreator onCreate={onCreateCharacter} creator={activeUser} otherChars={characters.filter(char=>char.creator===activeUser)}/>}/>
+        <Route path="/story-creator" element={<StoryCreator onCreate={onCreateStory} creator={activeUser} characters={characters.filter(char=>char.creator===activeUser)}/>}/>
         
         {characters.map(character=>
           <React.Fragment key={character.id}>
             <Route 
               path={`/character=${character.id}`} 
               element={<CharacterPage char={character}
-              myCreation={character.creator!==-1&&user===character.creator}
+              myCreation={character.creator!==-1&&activeUser===character.creator}
               onDelete={onCharacterDelete} 
               />}/>
               <Route
@@ -574,27 +633,27 @@ const onPlotpointDelete = async (id,story)=>{
 
         {stories.map(story=>
           <React.Fragment key={story.id}>
-            <Route path={`/story=${story.id}`} element={<StoryPage story={story} myStory={story.creator!==-1&&story.creator===user} onDelete={onStoryDelete}/>}/>
-            <Route path={`/story=${story.id}/editor`} element={<StoryCreator curStory={story} onCreate={onEditStory} creator={user} characters={characters.filter(char=>char.creator===story.creator)}/>}/>
-            <Route path={`/story=${story.id}/plotpoint-creator`} element={<PlotpointCreator onCreate={onCreatePlotpoint} story={story} characters={characters.filter(char=>char.creator===story.creator)} creator={user}/>}/>
+            <Route path={`/story=${story.id}`} element={<StoryPage story={story} myStory={story.creator!==-1&&story.creator===activeUser} onDelete={onStoryDelete}/>}/>
+            <Route path={`/story=${story.id}/editor`} element={<StoryCreator curStory={story} onCreate={onEditStory} creator={activeUser} characters={characters.filter(char=>char.creator===story.creator)}/>}/>
+            <Route path={`/story=${story.id}/plotpoint-creator`} element={<PlotpointCreator onCreate={onCreatePlotpoint} story={story} characters={characters.filter(char=>char.creator===story.creator)} creator={activeUser}/>}/>
            
           </React.Fragment>
         )}
 
         {plotpoints.map(plot=>
               <React.Fragment key={plot.id}>
-                <Route path={`/plotpoint=${plot.id}`} element={<PlotpointPage plotpoint={plot} myPlotpoint={plot.creator!==-1&&plot.creator===user} onDelete={onPlotpointDelete}/>}/>
-                <Route path={`/plotpoint=${plot.id}/editor`} element={<PlotpointCreator curPlotpoint={plot} story={stories.filter(story=>story.id===plot.story)[0]} onCreate={onEditPlotpoint} characters={characters.filter(char=>char.creator===plot.creator)} creator={user}/>}/>
+                <Route path={`/plotpoint=${plot.id}`} element={<PlotpointPage plotpoint={plot} myPlotpoint={plot.creator!==-1&&plot.creator===activeUser} onDelete={onPlotpointDelete}/>}/>
+                <Route path={`/plotpoint=${plot.id}/editor`} element={<PlotpointCreator curPlotpoint={plot} story={stories.filter(story=>story.id===plot.story)[0]} onCreate={onEditPlotpoint} characters={characters.filter(char=>char.creator===plot.creator)} creator={activeUser}/>}/>
               </React.Fragment>  
         )}
 
-        {users.map(thisUser=>
-          <Route key={thisUser.id} 
-            path={`/user=${thisUser.id}`} 
-            element={<UserPage user={thisUser} 
-            isLogged={thisUser.id===user} 
-            characters={characters.filter(char=>char.creator===thisUser.id)} 
-            stories={stories.filter(story=>story.creator===thisUser.id)}
+        {users.map(user=>
+          <Route key={user.id} 
+            path={`/user=${user.id}`} 
+            element={<UserPage user={user} 
+            isLogged={user.id===user} 
+            characters={characters.filter(char=>char.creator===user.id)} 
+            stories={stories.filter(story=>story.creator===user.id)}
             completeDel={onUserDeleteComplete}
             accDelOnly={onUserDeleteAccOnly}/>}/>)}
       

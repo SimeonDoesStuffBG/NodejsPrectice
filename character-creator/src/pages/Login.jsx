@@ -15,8 +15,8 @@ const Login = ({onLogIn}) => {
     if(onLogIn(username, password)){
       setUsername('');
       setPassword('');
-      nav('/')
-    }
+      nav('/');
+    }else return;
   }
 
   return (

@@ -92,25 +92,25 @@ const CharacterCreator = ({curChar,onCreate,creator,otherChars}) => {
             <tr>
                 <td>
                     <ul>
-                        {otherChars.map(char=>{return {id:char.id,name:char.name}}).filter(char=>(friends.every(ch=>ch.id!=char.id) && enemies.every(ch=>ch.id!=char.id))).map(char=>
+                        {otherChars.map(char=>{return {id:char.id,name:char.name}}).filter(char=>(friends.every(ch=>ch.id!==char.id) && enemies.every(ch=>ch.id!==char.id))).map(char=>
                             <li key={char.id} onClick={()=>setFriends([...friends,char])} className="characterThing">{char.name}</li>)}
                     </ul>
                 </td>
                 <td>
                     <ul>
-                        {otherChars.map(char=>{return {id:char.id,name:char.name}}).filter(char=>(friends.every(ch=>ch.id!=char.id) && enemies.every(ch=>ch.id!=char.id))).map(char=>
+                        {otherChars.map(char=>{return {id:char.id,name:char.name}}).filter(char=>(friends.every(ch=>ch.id!==char.id) && enemies.every(ch=>ch.id!==char.id))).map(char=>
                             <li key={char.id} onClick={()=>setEnemies([...enemies,char])} className="characterThing">{char.name}</li>)}
                     </ul>
                 </td>
                 <td>
                     <ul>
-                        {otherChars.map(char=>{return {id:char.id,name:char.name}}).filter(char=>(relatives.every(ch=>ch.id!==char.id)) && lovers.every(ch=>ch.id!=char.id)).map(char=>
+                        {otherChars.map(char=>{return {id:char.id,name:char.name}}).filter(char=>(relatives.every(ch=>ch.id!==char.id)) && lovers.every(ch=>ch.id!==char.id)).map(char=>
                             <li key={char.id} onClick={()=>setRelatives([...relatives,char])} className="characterThing">{char.name}</li>)}
                     </ul>
                 </td>
                 <td> 
                     <ul>
-                    {otherChars.map(char=>{return {id:char.id,name:char.name}}).filter(char=>(relatives.every(ch=>ch.id!==char.id)) && lovers.every(ch=>ch.id!=char.id)).map(char=>
+                    {otherChars.map(char=>{return {id:char.id,name:char.name}}).filter(char=>(relatives.every(ch=>ch.id!==char.id)) && lovers.every(ch=>ch.id!==char.id)).map(char=>
                             <li key={char.id} onClick={()=>setLovers([...lovers,char])} className="characterThing">{char.name}</li>)}
                     </ul>
                 </td>

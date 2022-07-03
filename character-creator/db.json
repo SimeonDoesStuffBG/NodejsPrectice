@@ -63,12 +63,6 @@
         ],
         "Lovers": []
       },
-      "featuredIn": [
-        {
-          "id": 1,
-          "title": "Not Dune"
-        }
-      ],
       "createdOn": "2022-06-23T20:38:24.298Z",
       "updatedOn": "2022-07-01T15:08:51.663Z",
       "id": 1
@@ -84,7 +78,6 @@
         "Family": [],
         "Lovers": []
       },
-      "featuredIn": [],
       "createdOn": "2022-06-23T20:59:30.045Z",
       "updatedOn": "2022-06-23T20:59:30.045Z",
       "id": 2,
@@ -101,20 +94,6 @@
         "Family": [],
         "Lovers": []
       },
-      "featuredIn": [
-        {
-          "id": 1,
-          "title": "Not Dune"
-        },
-        {
-          "id": 2,
-          "title": "jjh"
-        },
-        {
-          "id": 3,
-          "title": "k;lg;dskg;s"
-        }
-      ],
       "createdOn": "2022-06-27T10:12:07.115Z",
       "updatedOn": "2022-07-01T15:08:51.671Z",
       "id": 3
@@ -130,16 +109,6 @@
         "Family": [],
         "Lovers": []
       },
-      "featuredIn": [
-        {
-          "id": 1,
-          "title": "Not Dune"
-        },
-        {
-          "id": 3,
-          "title": "k;lg;dskg;s"
-        }
-      ],
       "createdOn": "2022-06-27T10:20:28.953Z",
       "updatedOn": "2022-07-01T15:08:51.675Z",
       "id": 4
@@ -155,20 +124,6 @@
         "Family": [],
         "Lovers": []
       },
-      "featuredIn": [
-        {
-          "id": 1,
-          "title": "Not Dune"
-        },
-        {
-          "id": 2,
-          "title": "jjh"
-        },
-        {
-          "id": 3,
-          "title": "k;lg;dskg;s"
-        }
-      ],
       "createdOn": "2022-06-29T13:07:36.608Z",
       "updatedOn": "2022-07-01T15:08:51.676Z",
       "id": 5
@@ -208,12 +163,6 @@
           }
         ]
       },
-      "featuredIn": [
-        {
-          "id": 1,
-          "title": "Not Dune"
-        }
-      ],
       "createdOn": "2022-06-29T20:23:28.751Z",
       "updatedOn": "2022-07-01T15:08:51.685Z",
       "id": 6

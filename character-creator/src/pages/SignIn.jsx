@@ -15,16 +15,22 @@ const SignIn = ({onSignIn})=> {
     const onSubmit = (e)=>{
         e.preventDefault();
         let trimName= username.trim();
-        if(trimName===''||trimName!=username){
+        if(trimName===''||trimName!==username){
             alert('Enter Valid Username');
             return;
         }
 
-        if(password.trim()===''||password.trim()!=password){
+        if(password.trim()===''||password.trim()!==password){
             alert('Enter Valid Password');
             return;
         }
-        if(password!=repeatPass){
+
+        if(password.length <= 8){
+            alert('Password must be at least 9 characters long');
+            return;
+        }
+
+        if(password!==repeatPass){
             alert("Passwords don't match");
             return;
         }
@@ -42,7 +48,7 @@ const SignIn = ({onSignIn})=> {
             setPassword('');
             setRepeatPass('');
             nav('/login');
-        }
+        }else return;
 }
     
        
