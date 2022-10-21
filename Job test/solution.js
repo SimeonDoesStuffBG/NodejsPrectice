@@ -140,6 +140,8 @@ app.get('/:brandName', (req,res)=>{
                                 })
                         };
                         
+                        let objStr=JSON.stringify(obj,null,'\t');
+                        
                         console.log("success");
                         res.send("success");
                         fs.writeFile('query.json', objStr, err=>{
